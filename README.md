@@ -1,29 +1,11 @@
-# xHalo Buddhist — Rotating Halo V7
+# xHalo Buddhist Landing — Rotating Halo v8
 
-Cloudflare Pages static package with a redesigned, ultra-wide-safe layered hero.
+Cloudflare Pages 静态部署包。v8 在 v7 分层架构基础上修复佛像背后曼荼罗/银河素材的矩形边界：
 
-## V7 fixes
+- 暗色像素使用 `screen` 光效混合，不再形成矩形色块；
+- 椭圆形宽羽化遮罩使金色光环、蓝色星云和页面底色渐变融合；
+- 佛像、衣纹、莲花座和底部水面细节保持清晰，不参与羽化；
+- 保留双层旋转光环、河流波光、萤火虫、飘落花瓣和移动端降级；
+- 第二、三屏内容最大宽度仍为 1440px。
 
-- Keeps the ambient star field full-bleed while capping the actual page frame at **1920px**.
-- Removes the hard background break that appeared on ultra-wide monitors.
-- Separates the visual composition into independent layers:
-  1. CSS night sky and aurora
-  2. Procedural water underlay
-  3. Left river, floating lotus and shoreline-light background
-  4. Static mandala/galaxy backdrop
-  5. Dual SVG rotating halo
-  6. Clean transparent Buddha and lotus-pedestal foreground
-  7. Water shimmer, firefly lights and falling petals
-  8. Live HTML interface
-- Removes the baked lower-left scroll prompt from the river image.
-- Recreates the scroll prompt and arrow as an absolutely positioned HTML link.
-- Removes the baked “梵音静心” control from the image layer.
-- Cleans the Buddha foreground edge so no dark fringe appears around the statue.
-- Prevents duplicate pedestal imagery from appearing beneath the independent foreground.
-- Constrains animated canvases to the **1920px** scene frame on ultra-wide displays.
-- Adds centered **1440px** content containers to the second and third screens.
-- Preserves mobile layout, reduced-motion handling, visibility pausing and Canvas performance limits.
-
-## Deployment
-
-Upload the contents of this directory directly to Cloudflare Pages. No build command or external runtime dependency is required.
+ZIP 根目录可直接部署到 Cloudflare Pages，无需构建。
