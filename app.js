@@ -244,7 +244,7 @@
   };
 
   const resizeCanvas = () => {
-    width = Math.round(hero?.clientWidth || innerWidth);
+    width = Math.round(Math.min(hero?.clientWidth || innerWidth, 1920));
     height = Math.round(hero?.clientHeight || innerHeight);
     dpr = Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.15 : 1.5);
 

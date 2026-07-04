@@ -555,319 +555,305 @@ footer {
   .rotating-halo { opacity: .52; }
 }
 
-/* Exact visual-preservation occlusion layer --------------------------------
-   The approved full artwork remains the base, preserving the galaxy, temple,
-   water reflections, foreground lotus flowers and original aureole detail.
-   This same-source transparent foreground only occludes the moving SVG halo.
-   Because its pixels are copied from the base artwork, it introduces no visual
-   redesign and eliminates the former chest/face crossing artifact. */
-.hero-base {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.rotating-halo { z-index: 2; }
-.halo-occluder {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  display: block;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-.halo-occluder img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: saturate(1.04) contrast(1.02);
-  /* Do not reapply the hero's broad edge fade to the occlusion alpha. */
-  -webkit-mask-image: none;
-  mask-image: none;
+
+/* v7 — unified max-width scene and independent visual layers ----------------
+   The ambient hero remains full-bleed so ultra-wide displays never expose a
+   hard vertical boundary. All art, copy and controls live inside a centered
+   1920px frame. River, aureole backdrop and Buddha/lotus foreground are
+   independent assets and share one responsive coordinate system. */
+:root {
+  --page-max: 1920px;
+  --content-max: 1440px;
+  --frame-gutter: clamp(1.25rem, 4vw, 4.5rem);
 }
 
-@media (max-width: 759px) {
-  .halo-occluder img { object-position: center top; }
+body {
+  background: #030811;
 }
-
-/* Responsive lower-scene stage ----------------------------------------------
-   The old restoration asset contained several disconnected opaque islands, so
-   object-fit: cover pulled them apart on 21:9 and wider screens. The river is
-   now a continuous procedural plane. A single approved lower-left crop adds the
-   original lotus flowers and shoreline lights, and fades before the Buddha art.
-   Every layer has an independent role, so changes in viewport width cannot tear
-   the composition into separate rectangles. */
-.water-plane {
-  position: absolute;
-  z-index: -5;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: clamp(220px, 31vh, 390px);
-  pointer-events: none;
-  overflow: hidden;
-  background:
-    radial-gradient(ellipse at 72% 112%, rgba(226, 143, 39, .24), transparent 45%),
-    radial-gradient(ellipse at 30% 100%, rgba(218, 143, 42, .16), transparent 43%),
-    linear-gradient(to bottom, rgba(4, 11, 21, 0) 0%, rgba(5, 14, 25, .42) 18%, rgba(5, 13, 22, .88) 54%, #030811 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.34) 13%, #000 42% 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.34) 13%, #000 42% 100%);
-}
-.water-plane::before {
-  content: "";
-  position: absolute;
-  inset: 24% -4% -8%;
-  opacity: .52;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      transparent 0 7px,
-      rgba(239, 184, 84, .065) 8px,
-      transparent 9px 15px
-    ),
-    linear-gradient(90deg,
-      transparent 0 8%,
-      rgba(232, 166, 63, .13) 13%,
-      transparent 21% 31%,
-      rgba(248, 199, 102, .1) 37%,
-      transparent 45% 56%,
-      rgba(222, 141, 39, .12) 64%,
-      transparent 74% 100%);
-  filter: blur(.35px);
-  transform: perspective(460px) rotateX(63deg) scaleY(1.7);
-  transform-origin: center bottom;
-}
-.water-plane::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -12%;
-  height: 76%;
-  opacity: .68;
-  background:
-    radial-gradient(ellipse at 58% 24%, rgba(255, 206, 112, .15), transparent 25%),
-    radial-gradient(ellipse at 22% 30%, rgba(238, 167, 62, .12), transparent 22%),
-    linear-gradient(to bottom, transparent, rgba(0, 0, 0, .34));
-  filter: blur(14px);
-}
-
-.river-lotus-left {
-  position: absolute;
-  z-index: -4;
-  left: 0;
-  bottom: -1px;
-  display: block;
-  width: min(54vw, 1040px);
-  pointer-events: none;
-  opacity: .98;
-  filter: saturate(1.05) contrast(1.03);
-  transform: translateZ(0);
-}
-.river-lotus-left img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-#water-canvas {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  mix-blend-mode: screen;
-  opacity: .9;
-}
-#petal-canvas { z-index: 4; }
-
-/* Keep the scene connected on ultra-wide monitors. The Buddha group remains
-   right-anchored; the river crop extends just beneath its feathered left edge. */
-@media (min-width: 1600px) and (min-aspect-ratio: 21 / 9) {
-  .hero-art {
-    right: -1vw;
-    width: min(52vw, 1080px);
-  }
-  .river-lotus-left { width: min(51vw, 1080px); }
-  .water-plane { height: clamp(270px, 32vh, 430px); }
-}
-
-@media (max-width: 759px) {
-  /* The dedicated portrait artwork already contains its own lower reflection. */
-  .water-plane,
-  .river-lotus-left,
-  #water-canvas { display: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #water-canvas { display: none; }
-}
-
-/* Reveal the photographic river at the bottom without weakening the text-side
-   contrast in the upper two-thirds of the hero. */
-@media (min-width: 760px) {
-  .hero-vignette {
-    -webkit-mask-image: linear-gradient(to bottom, #000 0 64%, rgba(0,0,0,.82) 76%, rgba(0,0,0,.38) 89%, rgba(0,0,0,.16) 100%);
-    mask-image: linear-gradient(to bottom, #000 0 64%, rgba(0,0,0,.82) 76%, rgba(0,0,0,.38) 89%, rgba(0,0,0,.16) 100%);
-  }
-  #water-canvas { z-index: 3; }
-  #petal-canvas { z-index: 4; }
-}
-
-/* v6 unified scene coordinate system ----------------------------------------
-   All desktop visual layers are now mapped to the same approved 1536x1024
-   source canvas. The hero is capped at 1920px and centered, so ultra-wide
-   monitors no longer pull the river and Buddha into separate coordinate
-   systems. */
-:root { --page-max: 1920px; }
 
 .site-header {
   left: 50%;
   right: auto;
   width: min(100%, var(--page-max));
+  max-width: var(--page-max);
   transform: translateX(-50%);
 }
 
 .hero {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  background:
+    radial-gradient(circle at 71% 38%, rgba(43, 72, 126, .20), transparent 32%),
+    radial-gradient(circle at 74% 72%, rgba(154, 91, 31, .13), transparent 31%),
+    radial-gradient(circle at 16% 28%, rgba(12, 38, 76, .18), transparent 34%),
+    linear-gradient(110deg, #02060d 0%, #040b18 48%, #030711 100%);
+}
+
+.hero-frame {
+  position: relative;
   width: min(100%, var(--page-max));
+  max-width: var(--page-max);
+  height: 100%;
   margin-inline: auto;
 }
 
-.scene-plane {
+.hero-stage {
   position: absolute;
-  z-index: -4;
-  left: 0;
-  top: 50%;
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  transform: translateY(-50%);
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
   pointer-events: none;
-  overflow: visible;
 }
 
-/* Full-width approved river crop. The top feather prevents any rectangular
-   seam, while the right feather disappears beneath the foreground Buddha art. */
+/* Continuous procedural water remains beneath the photographic river layer,
+   filling its feathered edges and the outer portion of ultra-wide screens. */
+.hero-stage .water-plane {
+  position: absolute;
+  z-index: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(230px, 34vh, 390px);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 68% 112%, rgba(231, 151, 42, .25), transparent 43%),
+    radial-gradient(ellipse at 27% 110%, rgba(218, 143, 42, .14), transparent 46%),
+    linear-gradient(to bottom, rgba(3, 10, 20, 0), rgba(4, 13, 24, .58) 28%, #030811 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 22%, #000 52% 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.5) 22%, #000 52% 100%);
+}
+.hero-stage .water-plane::before {
+  content: "";
+  position: absolute;
+  inset: 20% -4% -10%;
+  opacity: .48;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 7px, rgba(242,190,91,.06) 8px, transparent 9px 16px),
+    linear-gradient(90deg, transparent 0 7%, rgba(234,168,64,.11) 14%, transparent 22% 34%, rgba(248,199,102,.09) 41%, transparent 52% 62%, rgba(220,139,38,.10) 69%, transparent 80% 100%);
+  filter: blur(.35px);
+  transform: perspective(480px) rotateX(64deg) scaleY(1.75);
+  transform-origin: center bottom;
+}
+
 .river-background {
   position: absolute;
   z-index: 1;
-  left: 0;
-  top: 70.3125%; /* y=720 on the 1536x1024 source canvas */
-  width: 100%;
-  height: 29.6875%;
+  left: 50%;
+  bottom: 0;
   display: block;
+  width: 100%;
+  height: auto;
+  transform: translateX(-50%);
   pointer-events: none;
-  filter: saturate(1.035) contrast(1.02);
-  -webkit-mask-image:
-    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.08) 8%, rgba(0,0,0,.62) 23%, #000 38% 100%),
-    linear-gradient(to right, #000 0 88%, rgba(0,0,0,.72) 94%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image:
-    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.08) 8%, rgba(0,0,0,.62) 23%, #000 38% 100%),
-    linear-gradient(to right, #000 0 88%, rgba(0,0,0,.72) 94%, transparent 100%);
-  mask-composite: intersect;
+  filter: saturate(1.035) contrast(1.015);
 }
 .river-background img {
   display: block;
   width: 100%;
+  height: auto;
+}
+
+/* Buddha group: static star/mandala backdrop -> rotating SVG aureole ->
+   clean transparent Buddha and lotus foreground. */
+.buddha-group {
+  position: absolute;
+  z-index: 3;
+  right: 4.5%;
+  bottom: -1.5%;
+  width: min(61%, 102dvh, 1125px);
+  aspect-ratio: 900 / 850;
+  transform: translate3d(var(--art-x, 0), var(--art-y, 0), 0);
+  transform-origin: 58% 46%;
+  will-change: transform;
+  isolation: isolate;
+}
+.buddha-backdrop,
+.buddha-foreground {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
   height: 100%;
   object-fit: fill;
+  pointer-events: none;
 }
-
-/* Exact placement of the approved 900x850 crop: source x=500, y=80. */
-.scene-plane .hero-art {
+.buddha-backdrop { z-index: 0; }
+.buddha-foreground {
   z-index: 3;
-  left: 32.552083%;
-  top: 7.8125%;
-  right: auto;
-  width: 58.59375%;
-  height: 83.0078125%;
-  transform: none;
-  transform-origin: center;
+  filter: saturate(1.035) contrast(1.015) drop-shadow(0 0 10px rgba(243,184,75,.08));
 }
-.scene-plane .hero-art picture,
-.scene-plane .hero-art img { width: 100%; height: 100%; }
-.scene-plane .hero-base img,
-.scene-plane .halo-occluder img { object-fit: fill; object-position: center; }
-
-/* Halo sizing is relative to the approved foreground crop, not the viewport. */
-.scene-plane .rotating-halo {
+.buddha-group .rotating-halo {
+  z-index: 2;
   top: 30.2%;
   width: 72%;
 }
-
-/* Procedural water remains behind the photographic river and foreground art. */
-.scene-plane .water-plane {
-  z-index: 0;
-  left: 0;
-  right: 0;
-  top: 67%;
-  bottom: auto;
-  height: 33%;
+.buddha-group .art-bloom {
+  z-index: 1;
+  inset: 7% 7% 8%;
 }
 
-/* The approved river crop already contains the desktop scroll cue. */
-.mobile-scroll-hint { display: none; }
-
-/* Keep the canvas inside the fixed-width hero rather than sizing it to the
-   physical browser width on ultra-wide displays. */
 #water-canvas,
-#petal-canvas { inset: 0; }
+#petal-canvas {
+  left: 50%;
+  right: auto;
+  width: min(100%, var(--page-max));
+  max-width: var(--page-max);
+  transform: translateX(-50%);
+}
+#water-canvas {
+  position: absolute;
+  inset-block: 0;
+  z-index: 6;
+  height: 100%;
+  pointer-events: none;
+}
+#petal-canvas { z-index: 8; }
+
+.hero-vignette {
+  z-index: 7;
+  background:
+    linear-gradient(to right, rgba(2,6,13,.97) 0%, rgba(2,6,13,.84) 29%, rgba(2,6,13,.28) 52%, rgba(2,6,13,.03) 76%),
+    linear-gradient(to top, rgba(1,4,9,.48), transparent 34%);
+}
+
+.hero-content {
+  z-index: 10;
+  width: min(47rem, 50%);
+  padding-left: clamp(2rem, 5.6vw, 6.7rem);
+}
+
+/* The cue is a real absolutely positioned page element. It is no longer baked
+   into the river image and therefore stays crisp and aligned at every width. */
+.scroll-hint {
+  left: clamp(2rem, 5.6vw, 6.7rem);
+  bottom: max(1.35rem, env(safe-area-inset-bottom));
+  z-index: 12;
+}
+.side-progress {
+  right: clamp(1rem, 2.3vw, 2.75rem);
+}
+
+/* Section backgrounds remain full-width; actual page content is capped and
+   centered on screens two and three. */
+.section {
+  width: 100%;
+  padding-inline: clamp(1.4rem, 4.5vw, 5rem);
+}
+.section-inner {
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
+.section-intro .section-inner > p {
+  max-width: 48rem;
+  margin: 1.5rem 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+.section-quote {
+  display: block;
+  min-height: 68vh;
+}
+.section-quote .section-inner {
+  min-height: 68vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+footer {
+  display: block;
+  padding-inline: clamp(1.4rem, 4.5vw, 5rem);
+}
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100%, var(--content-max));
+  margin-inline: auto;
+}
 
 @media (min-width: 1921px) {
-  .hero::before,
-  .hero::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    width: calc((100vw - var(--page-max)) / 2 + 2px);
-    z-index: 20;
-    pointer-events: none;
-    background: linear-gradient(to right, #02060d, rgba(2,6,13,.94));
+  /* The scene stops growing at 1920px, while ambient gradients continue across
+     the viewport. Feathered river/backdrop edges prevent a visible boundary. */
+  .hero {
+    box-shadow: inset 0 0 190px rgba(0,0,0,.18);
   }
-  .hero::before { left: 0; }
-  .hero::after { right: 0; transform: scaleX(-1); }
+}
+
+@media (max-width: 1180px) {
+  .buddha-group {
+    right: -2%;
+    width: min(66%, 101dvh, 950px);
+  }
+  .hero-content { width: 52%; }
 }
 
 @media (max-width: 759px) {
-  .site-header,
-  .hero { width: 100%; }
-
-  .scene-plane {
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: auto;
-    transform: none;
-  }
+  .site-header { width: 100%; }
+  .hero-frame { width: 100%; }
+  .hero-stage { inset: 0; }
+  .hero-stage .water-plane,
   .river-background,
-  .scene-plane .water-plane { display: none; }
+  #water-canvas { display: none; }
 
-  .scene-plane .hero-art {
-    top: 0;
-    left: 0;
-    right: 0;
+  .buddha-group {
+    top: 3.5svh;
+    right: auto;
+    bottom: auto;
+    left: 50%;
+    width: min(142vw, 620px);
+    transform: translate3d(calc(-50% + var(--art-x, 0)), var(--art-y, 0), 0);
+  }
+  .buddha-group .rotating-halo {
+    top: 30.2%;
+    width: 72%;
+  }
+  .hero-content {
     width: 100%;
-    height: 78svh;
-    transform: translate3d(var(--art-x, 0), var(--art-y, 0), 0) scale(1.025);
+    min-height: 100svh;
+    height: auto;
+    padding: 61svh 1.2rem 5.8rem;
   }
-  .scene-plane .hero-base img,
-  .scene-plane .halo-occluder img {
-    object-fit: cover;
-    object-position: center top;
+  .scroll-hint {
+    left: 1.2rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
   }
-  .scene-plane .rotating-halo {
-    top: 31.2%;
-    width: 82vw;
+  #petal-canvas { width: 100%; }
+  .section { padding-inline: 1.2rem; }
+  .footer-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
   }
-  .mobile-scroll-hint { display: flex; }
 }
 
-/* Browser-independent feather is embedded in the RGBA WebP. */
-.river-background {
-  -webkit-mask-image: none;
-  mask-image: none;
+@media (prefers-reduced-motion: reduce) {
+  .buddha-group { transform: none !important; }
+  #water-canvas { display: none; }
 }
+
+/* v7.1 mobile centering correction */
+@media (max-width: 759px) {
+  .buddha-group {
+    width: min(132vw, 580px);
+    transform: translateX(-50%) translate3d(var(--art-x, 0px), var(--art-y, 0px), 0);
+  }
+}
+
+/* v7.2 soften the baked centre of the source river beneath the independent
+   Buddha group without punching a transparent hole into the water. */
+.river-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 34% 72% at 58% 8%, rgba(3,8,17,.94) 0%, rgba(3,8,17,.78) 34%, rgba(3,8,17,.26) 62%, transparent 82%);
+}
+
+/* v7.3 final river composition: left-bank river/lotus photography only.
+   The centre and right water are procedural, so no baked Buddha base or sound
+   control can reappear beneath the independent foreground group. */
+.river-background::after { display: none; }
