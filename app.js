@@ -6,6 +6,7 @@
   const menuButton = document.querySelector('[data-menu-button]');
   const mobileMenu = document.querySelector('[data-mobile-menu]');
   const art = document.querySelector('[data-art]');
+  const hero = document.querySelector('.hero');
   const canvas = document.getElementById('petal-canvas');
   const ctx = canvas?.getContext('2d', { alpha: true });
   const waterCanvas = document.getElementById('water-canvas');
@@ -62,16 +63,17 @@
 
   if (!reduceMotion.matches && !coarsePointer.matches) {
     window.addEventListener('pointermove', (event) => {
-      pointerX = event.clientX;
-      pointerY = event.clientY;
-      targetX = ((event.clientX / innerWidth) - 0.5) * -10;
-      targetY = ((event.clientY / innerHeight) - 0.5) * -7;
+      const rect = hero?.getBoundingClientRect();
+      if (!rect || event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) return;
+      pointerX = event.clientX - rect.left;
+      pointerY = event.clientY - rect.top;
+      targetX = ((pointerX / rect.width) - 0.5) * -4;
+      targetY = ((pointerY / rect.height) - 0.5) * -3;
       requestParallax();
     }, { passive: true });
   }
 
   // Pause CSS aureole rotation while the hero is outside the viewport or the tab is hidden.
-  const hero = document.querySelector('.hero');
   let heroInView = true;
   const syncAmbientMotion = () => {
     root.classList.toggle('motion-paused', document.hidden || !heroInView);
@@ -92,6 +94,7 @@
   let dpr = 1;
   let petals = [];
   let glints = [];
+  let fireflies = [];
   let waterEnabled = false;
   let animationFrame = 0;
   let lastTime = 0;
@@ -148,8 +151,8 @@
   class WaterGlint {
     constructor() { this.reset(); }
     reset() {
-      this.x = random(0.015, 0.985);
-      this.y = random(0.765, 0.992);
+      this.x = random(0.015, 0.64);
+      this.y = random(0.815, 0.992);
       this.length = random(9, 58);
       this.alpha = random(0.06, 0.34);
       this.phase = random(0, Math.PI * 2);
@@ -187,6 +190,48 @@
     }
   }
 
+
+  class Firefly {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = random(0.035, 0.57);
+      this.y = random(0.805, 0.965);
+      this.radius = random(0.7, 2.05);
+      this.phase = random(0, Math.PI * 2);
+      this.speed = random(0.00038, 0.00092);
+      this.driftX = random(3, 13);
+      this.driftY = random(2, 8);
+      this.alpha = random(0.12, 0.42);
+      this.warmth = Math.random();
+    }
+    draw(time) {
+      if (!waterCtx) return;
+      const wave = (Math.sin(time * this.speed + this.phase) + 1) * 0.5;
+      const pulse = Math.pow(wave, 2.6);
+      if (pulse < 0.035) return;
+      const x = this.x * width + Math.sin(time * 0.00017 + this.phase) * this.driftX;
+      const y = this.y * height + Math.cos(time * 0.00013 + this.phase) * this.driftY;
+      const radius = this.radius * (1.1 + pulse * 1.4);
+      const glow = waterCtx.createRadialGradient(x, y, 0, x, y, radius * 7.5);
+      const core = this.warmth > .22 ? '255,210,112' : '219,232,255';
+      glow.addColorStop(0, `rgba(${core},${this.alpha * pulse})`);
+      glow.addColorStop(.18, `rgba(${core},${this.alpha * pulse * .65})`);
+      glow.addColorStop(1, `rgba(${core},0)`);
+      waterCtx.fillStyle = glow;
+      waterCtx.beginPath();
+      waterCtx.arc(x, y, radius * 7.5, 0, Math.PI * 2);
+      waterCtx.fill();
+      if (pulse > .72) {
+        waterCtx.globalAlpha = this.alpha * pulse * .75;
+        waterCtx.fillStyle = 'rgba(255,244,204,.95)';
+        waterCtx.beginPath();
+        waterCtx.arc(x, y, Math.max(.55, radius * .42), 0, Math.PI * 2);
+        waterCtx.fill();
+        waterCtx.globalAlpha = 1;
+      }
+    }
+  }
+
   const drawWater = (time) => {
     if (!waterEnabled || !waterCtx) return;
     waterCtx.clearRect(0, 0, width, height);
@@ -194,12 +239,13 @@
     waterCtx.globalCompositeOperation = 'lighter';
     waterCtx.lineCap = 'round';
     for (const glint of glints) glint.draw(time);
+    for (const firefly of fireflies) firefly.draw(time);
     waterCtx.restore();
   };
 
   const resizeCanvas = () => {
-    width = innerWidth;
-    height = innerHeight;
+    width = Math.round(hero?.clientWidth || innerWidth);
+    height = Math.round(hero?.clientHeight || innerHeight);
     dpr = Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.15 : 1.5);
 
     if (canvas && ctx) {
@@ -219,8 +265,10 @@
       waterCanvas.style.width = `${width}px`;
       waterCanvas.style.height = `${height}px`;
       waterCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const glintCount = waterEnabled ? Math.min(92, Math.max(46, Math.round(width / 24))) : 0;
+      const glintCount = waterEnabled ? Math.min(72, Math.max(34, Math.round(width / 31))) : 0;
+      const fireflyCount = waterEnabled ? Math.min(24, Math.max(12, Math.round(width / 92))) : 0;
       glints = Array.from({ length: glintCount }, () => new WaterGlint());
+      fireflies = Array.from({ length: fireflyCount }, () => new Firefly());
     }
   };
 

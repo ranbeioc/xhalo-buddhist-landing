@@ -716,3 +716,158 @@ footer {
   #water-canvas { z-index: 3; }
   #petal-canvas { z-index: 4; }
 }
+
+/* v6 unified scene coordinate system ----------------------------------------
+   All desktop visual layers are now mapped to the same approved 1536x1024
+   source canvas. The hero is capped at 1920px and centered, so ultra-wide
+   monitors no longer pull the river and Buddha into separate coordinate
+   systems. */
+:root { --page-max: 1920px; }
+
+.site-header {
+  left: 50%;
+  right: auto;
+  width: min(100%, var(--page-max));
+  transform: translateX(-50%);
+}
+
+.hero {
+  width: min(100%, var(--page-max));
+  margin-inline: auto;
+}
+
+.scene-plane {
+  position: absolute;
+  z-index: -4;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  transform: translateY(-50%);
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Full-width approved river crop. The top feather prevents any rectangular
+   seam, while the right feather disappears beneath the foreground Buddha art. */
+.river-background {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 70.3125%; /* y=720 on the 1536x1024 source canvas */
+  width: 100%;
+  height: 29.6875%;
+  display: block;
+  pointer-events: none;
+  filter: saturate(1.035) contrast(1.02);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.08) 8%, rgba(0,0,0,.62) 23%, #000 38% 100%),
+    linear-gradient(to right, #000 0 88%, rgba(0,0,0,.72) 94%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.08) 8%, rgba(0,0,0,.62) 23%, #000 38% 100%),
+    linear-gradient(to right, #000 0 88%, rgba(0,0,0,.72) 94%, transparent 100%);
+  mask-composite: intersect;
+}
+.river-background img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+/* Exact placement of the approved 900x850 crop: source x=500, y=80. */
+.scene-plane .hero-art {
+  z-index: 3;
+  left: 32.552083%;
+  top: 7.8125%;
+  right: auto;
+  width: 58.59375%;
+  height: 83.0078125%;
+  transform: none;
+  transform-origin: center;
+}
+.scene-plane .hero-art picture,
+.scene-plane .hero-art img { width: 100%; height: 100%; }
+.scene-plane .hero-base img,
+.scene-plane .halo-occluder img { object-fit: fill; object-position: center; }
+
+/* Halo sizing is relative to the approved foreground crop, not the viewport. */
+.scene-plane .rotating-halo {
+  top: 30.2%;
+  width: 72%;
+}
+
+/* Procedural water remains behind the photographic river and foreground art. */
+.scene-plane .water-plane {
+  z-index: 0;
+  left: 0;
+  right: 0;
+  top: 67%;
+  bottom: auto;
+  height: 33%;
+}
+
+/* The approved river crop already contains the desktop scroll cue. */
+.mobile-scroll-hint { display: none; }
+
+/* Keep the canvas inside the fixed-width hero rather than sizing it to the
+   physical browser width on ultra-wide displays. */
+#water-canvas,
+#petal-canvas { inset: 0; }
+
+@media (min-width: 1921px) {
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc((100vw - var(--page-max)) / 2 + 2px);
+    z-index: 20;
+    pointer-events: none;
+    background: linear-gradient(to right, #02060d, rgba(2,6,13,.94));
+  }
+  .hero::before { left: 0; }
+  .hero::after { right: 0; transform: scaleX(-1); }
+}
+
+@media (max-width: 759px) {
+  .site-header,
+  .hero { width: 100%; }
+
+  .scene-plane {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    transform: none;
+  }
+  .river-background,
+  .scene-plane .water-plane { display: none; }
+
+  .scene-plane .hero-art {
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 78svh;
+    transform: translate3d(var(--art-x, 0), var(--art-y, 0), 0) scale(1.025);
+  }
+  .scene-plane .hero-base img,
+  .scene-plane .halo-occluder img {
+    object-fit: cover;
+    object-position: center top;
+  }
+  .scene-plane .rotating-halo {
+    top: 31.2%;
+    width: 82vw;
+  }
+  .mobile-scroll-hint { display: flex; }
+}
+
+/* Browser-independent feather is embedded in the RGBA WebP. */
+.river-background {
+  -webkit-mask-image: none;
+  mask-image: none;
+}

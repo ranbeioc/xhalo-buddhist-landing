@@ -1,25 +1,31 @@
-# xHalo Buddhist — Rotating Halo V5
+# xHalo Buddhist — Rotating Halo V6
 
 Cloudflare Pages static package based on the approved rotating-halo composition.
 
-## V5 fixes
+## V6 fixes
 
-- Replaces the disconnected lower-scene raster islands that separated on 21:9 and wider screens.
-- Adds a continuous full-width procedural river plane, so there is no rectangular missing area between the left bank and Buddha artwork.
-- Restores the approved lower-left floating lotus flowers, shoreline lights and water reflections as one feathered transparent crop.
-- Keeps the V3/V4 Buddha occluder and refined dual SVG rotating halo unchanged.
-- Adds a lightweight Canvas water-glint layer with horizontal gold and cool-white shimmer strokes.
-- Pauses all Canvas animation when the hero leaves the viewport or the tab is hidden.
-- Disables water animation for mobile and `prefers-reduced-motion`.
+- Caps the desktop hero at a centered maximum width of **1920px** so ultra-wide monitors cannot pull visual layers apart.
+- Maps the desktop scene to one shared **1536 × 1024 source coordinate system**.
+- Places the approved Buddha crop at its exact original source coordinates (`x=500`, `y=80`, `900 × 850`).
+- Restores the lower river, floating lotuses, shoreline lights and reflections as an independent full-width background layer.
+- Places the Buddha and lotus pedestal layer above the river layer, preserving the existing refined rotating halo and occlusion behavior.
+- Removes the former independent `vw`-scaled river crop that produced visible rectangular seams at ordinary and ultra-wide aspect ratios.
+- Adds restrained gold and cool-white water shimmer lines.
+- Adds subtle firefly-like light particles only over the lower-left river region.
+- Sizes all Canvas effects from the centered hero container rather than the physical ultra-wide browser width.
+- Pauses Canvas and halo animation when the hero leaves the viewport or the tab is hidden.
+- Keeps mobile and `prefers-reduced-motion` fallbacks.
 
-## Layer order
+## Desktop layer order
 
-1. CSS star field and aurora
-2. Continuous procedural river plane
-3. Feathered lower-left river/lotus artwork
-4. Approved Buddha artwork
-5. Refined dual SVG rotating halo
-6. Exact-pixel Buddha/lotus occluder
-7. Vignette, water shimmer, falling petals and live page UI
+1. CSS night-sky background and aurora
+2. Unified 1536 × 1024 scene plane
+3. Procedural water underlay
+4. Independent full-width river and lotus background
+5. Approved Buddha artwork crop
+6. Refined dual SVG rotating halo
+7. Exact-pixel Buddha and lotus occluder
+8. Water shimmer and lower-left firefly particles
+9. Falling petals, vignette and live HTML interface
 
 Deploy the directory contents directly to Cloudflare Pages. No build step or external dependency is required.

@@ -14,6 +14,7 @@
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="preload" as="image" href="/assets/hero-buddha-desktop.webp" media="(min-width: 760px)" fetchpriority="high" />
   <link rel="preload" as="image" href="/assets/hero-buddha-mobile.webp" media="(max-width: 759px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="/assets/river-background-desktop.webp" media="(min-width: 760px)" />
   <link rel="stylesheet" href="/styles.css" />
   <title>xHalo Buddhist · 一念花开</title>
 </head>
@@ -59,7 +60,13 @@
       <div class="aurora aurora-one" aria-hidden="true"></div>
       <div class="aurora aurora-two" aria-hidden="true"></div>
 
-      <div class="hero-art" aria-hidden="true" data-art>
+      <div class="scene-plane" aria-hidden="true">
+        <div class="water-plane"></div>
+        <picture class="river-background">
+          <img src="/assets/river-background-desktop.webp" width="1536" height="304" alt="" decoding="async" />
+        </picture>
+
+        <div class="hero-art" aria-hidden="true" data-art>
         <picture class="hero-base">
           <source media="(max-width: 759px)" srcset="/assets/hero-buddha-mobile.webp" />
           <img src="/assets/hero-buddha-desktop.webp" width="900" height="850" alt="" fetchpriority="high" decoding="async" />
@@ -143,15 +150,9 @@
         </picture>
 
         <div class="art-bloom"></div>
-      </div>
+        </div>
 
-      <!-- A responsive lower water stage spans the entire viewport. The approved
-           lotus-and-river crop is anchored at the lower-left and fades into the
-           procedural water, while the Buddha artwork remains a separate right layer. -->
-      <div class="water-plane" aria-hidden="true"></div>
-      <picture class="river-lotus-left" aria-hidden="true">
-        <img src="/assets/river-lotus-left.webp" width="850" height="244" alt="" decoding="async" />
-      </picture>
+      </div>
 
       <canvas id="water-canvas" aria-hidden="true"></canvas>
       <canvas id="petal-canvas" aria-hidden="true"></canvas>
@@ -174,7 +175,7 @@
         </div>
       </div>
 
-      <a class="scroll-hint" href="#sutras" aria-label="向下滚动查看佛典能力">
+      <a class="scroll-hint mobile-scroll-hint" href="#sutras" aria-label="向下滚动查看佛典能力">
         <span>向下滚动 探索更多</span>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
       </a>
