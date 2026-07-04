@@ -1,0 +1,9 @@
+{
+  "name": "xHalo Buddhist",
+  "short_name": "xHalo Buddhist",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#030811",
+  "theme_color": "#030811",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
