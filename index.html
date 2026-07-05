@@ -54,7 +54,14 @@
     })(window, document, "clarity", "script", "wjvx74gudw");
 </script>
 
-<link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css" rel="stylesheet"/>
+<style>
+  /* Guard against browser CSS cache issues to prevent header layout shift */
+  .header-right { display: flex; align-items: center; gap: 0.9rem; justify-self: end; }
+  .lang-selector { position: relative; }
+  .lang-dropdown { position: absolute; opacity: 0; visibility: hidden; list-style: none; margin: 0; padding: 0; z-index: 200; }
+  .lang-selector.open .lang-dropdown { opacity: 1; visibility: visible; }
+</style>
+<link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css?v=8.1.0" rel="stylesheet"/>
 <title id="page-title">xHalo Buddhist · 一念花开</title>
 </head>
 <body>
@@ -257,7 +264,7 @@
 </a>
 <p data-i18n="footer_text">数字佛典 · 智慧之门</p>
 </div></footer>
-<script src="/i18n.js" defer></script>
-<script defer="" src="/app.js"></script>
+<script src="/i18n.js?v=8.1.0" defer></script>
+<script defer="" src="/app.js?v=8.1.0"></script>
 </body>
 </html>
