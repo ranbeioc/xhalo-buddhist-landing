@@ -986,14 +986,27 @@ footer {
 }
 
 .lang-col-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
   padding: 0 0.2rem 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.lang-col-title span:first-child {
   color: rgba(255, 255, 255, 0.42);
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  user-select: none;
+}
+
+.lang-col-title span:last-child {
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .lang-list {
