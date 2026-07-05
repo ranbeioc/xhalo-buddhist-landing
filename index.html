@@ -1,28 +1,66 @@
 <!DOCTYPE html>
 
-<html lang="zh-CN">
+<html lang="zh-Hans">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
 <meta content="#030811" name="theme-color"/>
 <meta content="dark" name="color-scheme"/>
-<meta content="xHalo Buddhist — 多语言佛典、全文检索与语义探索。独立河流、佛像与旋转光环分层呈现。" name="description"/>
-<meta content="xHalo Buddhist · 一念花开" property="og:title"/>
-<meta content="穿越语言、时代与宗派的边界，在浩瀚佛典中寻找清明、慈悲与内在秩序。" property="og:description"/>
+<meta id="meta-desc" content="xHalo Buddhist — 多语言佛典、全文检索与语义探索。独立河流、佛像与旋转光环分层呈现。" name="description"/>
+<meta id="meta-og-title" content="xHalo Buddhist · 一念花开" property="og:title"/>
+<meta id="meta-og-desc" content="穿越语言、时代与宗派的边界，在浩瀚佛典中寻找清明、慈悲与内在秩序。" property="og:description"/>
 <meta content="website" property="og:type"/>
 <meta content="/assets/og-cover.webp" property="og:image"/>
 <link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="/manifest.webmanifest" rel="manifest"/>
 
+<!-- SEO Multilingual alternates -->
+<link rel="alternate" hreflang="zh-Hans" href="/?lang=zh-Hans" />
+<link rel="alternate" hreflang="zh-Hant" href="/?lang=zh-Hant" />
+<link rel="alternate" hreflang="ja" href="/?lang=ja" />
+<link rel="alternate" hreflang="ko" href="/?lang=ko" />
+<link rel="alternate" hreflang="en" href="/?lang=en" />
+<link rel="alternate" hreflang="de" href="/?lang=de" />
+<link rel="alternate" hreflang="es" href="/?lang=es" />
+<link rel="alternate" hreflang="fr" href="/?lang=fr" />
+<link rel="alternate" hreflang="it" href="/?lang=it" />
+<link rel="alternate" hreflang="pt" href="/?lang=pt" />
+<link rel="alternate" hreflang="th" href="/?lang=th" />
+<link rel="alternate" hreflang="my" href="/?lang=my" />
+<link rel="alternate" hreflang="vi" href="/?lang=vi" />
+<link rel="alternate" hreflang="km" href="/?lang=km" />
+<link rel="alternate" hreflang="lo" href="/?lang=lo" />
+<link rel="alternate" hreflang="id" href="/?lang=id" />
+<link rel="alternate" hreflang="ms" href="/?lang=ms" />
+<link rel="alternate" hreflang="x-default" href="/" />
 
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "xHalo Buddhist",
+  "url": "https://xhalo.buddhist.landing",
+  "description": "xHalo Buddhist — 多语言佛典、全文检索与语义探索。独立河流、佛像与旋转光环分层呈现。"
+}
+</script>
+
+<!-- Microsoft Clarity Analytics -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wjvx74gudw");
+</script>
 
 <link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css" rel="stylesheet"/>
-<title>xHalo Buddhist · 一念花开</title>
+<title id="page-title">xHalo Buddhist · 一念花开</title>
 </head>
 <body>
-<a class="skip-link" href="#main">跳到主要内容</a>
+<a class="skip-link" href="#main" data-i18n="skip_link">跳到主要内容</a>
 <header class="site-header" data-header="">
-<a aria-label="xHalo Buddhist 首页" class="brand" href="#top">
+<a aria-label="xHalo Buddhist 首页" class="brand" href="#top" data-i18n-aria="brand_aria">
 <svg aria-hidden="true" class="brand-mark" viewbox="0 0 64 64">
 <path d="M32 6c7.2 8.2 11.2 15.1 11.2 22.1 0 7.2-5 13-11.2 13s-11.2-5.8-11.2-13C20.8 21.1 24.8 14.2 32 6Z"></path>
 <path d="M8.5 29.2c10.4.1 18.2 2.7 23.5 9-4.4 7.1-11.1 10.7-18.2 8.6-6.3-1.9-9.5-8.2-5.3-17.6Z"></path>
@@ -31,24 +69,59 @@
 </svg>
 <span>xHalo Buddhist</span>
 </a>
-<nav aria-label="主导航" class="desktop-nav">
-<a class="active" href="#sutras">佛典</a>
-<a href="#wisdom">智慧</a>
-<a href="#practice">修行</a>
-<a href="#about">关于</a>
+<nav aria-label="主导航" class="desktop-nav" data-i18n-aria="menu_desktop_aria">
+<a class="active" href="#sutras" data-i18n="nav_sutras">佛典</a>
+<a href="#wisdom" data-i18n="nav_wisdom">智慧</a>
+<a href="#practice" data-i18n="nav_practice">修行</a>
+<a href="#about" data-i18n="nav_about">关于</a>
 </nav>
-<a class="header-cta" href="#sutras">进入体验</a>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="menu-button" data-menu-button="" type="button">
-<span></span><span></span>
-</button>
-<nav aria-label="移动端导航" class="mobile-menu" data-mobile-menu="" id="mobile-menu">
-<a href="#sutras">佛典</a>
-<a href="#wisdom">智慧</a>
-<a href="#practice">修行</a>
-<a href="#about">关于</a>
-<a class="mobile-cta" href="#sutras">进入体验</a>
-</nav>
-</header>
+<div class="header-right">
+  <div class="lang-selector" id="langSelector">
+    <button class="lang-btn" aria-haspopup="listbox" aria-expanded="false" aria-label="选择语言">
+      <svg class="earth-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M2 12h20" stroke="currentColor" stroke-width="1.5" />
+        <path d="M5.6 5.6a10 10 0 0 1 12.8 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+        <path d="M5.6 18.4a10 10 0 0 0 12.8 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+      </svg>
+      <span class="current-lang-name">简体中文</span>
+      <svg class="arrow-icon" viewBox="0 0 24 24" width="12" height="12" aria-hidden="true">
+        <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </button>
+    <ul class="lang-dropdown" role="listbox" id="langDropdown">
+      <li role="option" data-value="zh-Hans" class="active" tabindex="0">简体中文</li>
+      <li role="option" data-value="zh-Hant" tabindex="0">繁體中文</li>
+      <li role="option" data-value="ja" tabindex="0">日本語</li>
+      <li role="option" data-value="ko" tabindex="0">한국어</li>
+      <li role="option" data-value="en" tabindex="0">English</li>
+      <li role="option" data-value="de" tabindex="0">Deutsch</li>
+      <li role="option" data-value="es" tabindex="0">Español</li>
+      <li role="option" data-value="fr" tabindex="0">Français</li>
+      <li role="option" data-value="it" tabindex="0">Italiano</li>
+      <li role="option" data-value="pt" tabindex="0">Português</li>
+      <li role="option" data-value="th" tabindex="0">ไทย</li>
+      <li role="option" data-value="my" tabindex="0">မြန်မာ</li>
+      <li role="option" data-value="vi" tabindex="0">Tiếng Việt</li>
+      <li role="option" data-value="km" tabindex="0">ភាសាខ្មែរ</li>
+      <li role="option" data-value="lo" tabindex="0">ພາສາລາວ</li>
+      <li role="option" data-value="id" tabindex="0">Bahasa Indonesia</li>
+      <li role="option" data-value="ms" tabindex="0">Bahasa Melayu</li>
+    </ul>
+  </div>
+  <a class="header-cta" href="#sutras" data-i18n="cta_experience">进入体验</a>
+  <button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="menu-button" data-menu-button="" type="button">
+    <span></span><span></span>
+  </button>
+</div>
+<nav aria-label="移动端导航" class="mobile-menu" data-mobile-menu="" id="mobile-menu" data-i18n-aria="menu_mobile_aria">
+<a href="#sutras" data-i18n="nav_sutras">佛典</a>
+<a href="#wisdom" data-i18n="nav_wisdom">智慧</a>
+<a href="#practice" data-i18n="nav_practice">修行</a>
+<a href="#about" data-i18n="nav_about">关于</a>
+<a class="mobile-cta" href="#sutras" data-i18n="cta_experience">进入体验</a>
+</nav></header>
 <main id="main">
 <section aria-labelledby="hero-title" class="hero" id="top">
 <div aria-hidden="true" class="star-field"></div>
@@ -124,24 +197,24 @@
 </g>
 </svg>
 </div><img alt="" class="buddha-foreground" decoding="async" fetchpriority="high" height="850" src="/assets/buddha-foreground.webp" width="900"/><div aria-hidden="true" class="art-bloom"></div></div></div><canvas aria-hidden="true" id="water-canvas"></canvas><canvas aria-hidden="true" id="petal-canvas"></canvas><div class="hero-content">
-<p class="eyebrow"><span></span> 数字佛典 · 智慧之门</p>
+<p class="eyebrow"><span aria-hidden="true"></span><span data-i18n="hero_eyebrow">数字佛典 · 智慧之门</span></p>
 <h1 id="hero-title">
-<span>一念花开</span>
-<em>万法归心</em>
+<span data-i18n="hero_title_1">一念花开</span>
+<em data-i18n="hero_title_2">万法归心</em>
 </h1>
-<p class="hero-lead">穿越语言、时代与宗派的边界，在浩瀚佛典中寻找清明、慈悲与内在秩序。</p>
+<p class="hero-lead" data-i18n="hero_lead">穿越语言、时代与宗派的边界，在浩瀚佛典中寻找清明、慈悲与内在秩序。</p>
 <div class="hero-actions">
 <a class="button button-primary" href="#sutras">
-<span>开始探索</span>
+<span data-i18n="hero_btn_explore">开始探索</span>
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
 </a>
-<a class="button button-secondary" href="#about">了解 xHalo Buddhist</a>
+<a class="button button-secondary" href="#about" data-i18n="hero_btn_learn">了解 xHalo Buddhist</a>
 </div>
-</div><a aria-label="向下滚动查看佛典能力" class="scroll-hint" href="#sutras">
-<span>向下滚动 探索更多</span>
+</div><a aria-label="向下滚动查看佛典能力" class="scroll-hint" href="#sutras" data-i18n-aria="scroll_hint_aria">
+<span data-i18n="scroll_hint">向下滚动 探索更多</span>
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="m6 9 6 6 6-6"></path></svg>
 </a><div aria-hidden="true" class="side-progress">
-<i></i><i></i><i></i><span>SCROLL</span>
+<i></i><i></i><i></i><span data-i18n="scroll_text">SCROLL</span>
 </div></div><div aria-hidden="true" class="cursor-light"></div>
 <div aria-hidden="true" class="hero-vignette"></div>
 
@@ -149,41 +222,42 @@
 
 </section>
 <section class="section section-intro" id="sutras"><div class="section-inner">
-<div class="section-kicker">一处入口 · 多重经藏</div>
-<h2>让浩瀚佛典更易检索、更易阅读，也更容易彼此连接。</h2>
-<p>以结构化经文、跨语种版本、全文检索和语义探索为基础，构建面向现代阅读场景的佛典入口。</p>
+<div class="section-kicker" data-i18n="intro_kicker">一处入口 · 多重经藏</div>
+<h2 data-i18n="intro_title">让浩瀚佛典更易检索、更易阅读，也更容易彼此连接。</h2>
+<p data-i18n="intro_lead">以结构化经文、跨语种版本、全文检索和语义探索为基础，构建面向现代阅读场景的佛典入口。</p>
 <div class="feature-grid">
 <article class="feature-card">
-<span>01</span>
-<h3>多语佛典</h3>
-<p>在统一的作品与章节结构中组织不同语言、译本和传承来源。</p>
+<span data-i18n="feat_num_1">01</span>
+<h3 data-i18n="feat_title_1">多语佛典</h3>
+<p data-i18n="feat_desc_1">在统一的作品与章节结构中组织不同语言、译本和传承来源。</p>
 </article>
 <article class="feature-card" id="wisdom">
-<span>02</span>
-<h3>智慧检索</h3>
-<p>结合关键词、章节定位与语义探索，减少在海量文本中的检索成本。</p>
+<span data-i18n="feat_num_2">02</span>
+<h3 data-i18n="feat_title_2">智慧检索</h3>
+<p data-i18n="feat_desc_2">结合关键词、章节定位与语义探索，减少在海量文本中的检索成本。</p>
 </article>
 <article class="feature-card" id="practice">
-<span>03</span>
-<h3>清净阅读</h3>
-<p>以克制、专注和可访问的界面呈现经文，保持阅读过程的连续性。</p>
+<span data-i18n="feat_num_3">03</span>
+<h3 data-i18n="feat_title_3">清净阅读</h3>
+<p data-i18n="feat_desc_3">以克制、专注和可访问的界面呈现经文，保持阅读过程的连续性。</p>
 </article>
 </div>
 </div></section>
 <section class="section section-quote" id="about"><div class="section-inner">
 <div aria-hidden="true" class="quote-mark">“</div>
-<blockquote>应无所住，而生其心。</blockquote>
-<p>《金刚般若波罗蜜经》</p>
-<a class="button button-primary" href="#top">返回星空</a>
+<blockquote data-i18n="quote_content">应无所住，而生其心。</blockquote>
+<p data-i18n="quote_source">《金刚般若波罗蜜经》</p>
+<a class="button button-primary" href="#top" data-i18n="quote_btn">返回星空</a>
 </div></section>
 </main>
 <footer><div class="footer-inner">
-<a class="brand footer-brand" href="#top">
+<a class="brand footer-brand" href="#top" data-i18n-aria="brand_aria">
 <svg aria-hidden="true" class="brand-mark" viewbox="0 0 64 64"><path d="M32 6c7.2 8.2 11.2 15.1 11.2 22.1 0 7.2-5 13-11.2 13s-11.2-5.8-11.2-13C20.8 21.1 24.8 14.2 32 6Z"></path><path d="M8.5 29.2c10.4.1 18.2 2.7 23.5 9-4.4 7.1-11.1 10.7-18.2 8.6-6.3-1.9-9.5-8.2-5.3-17.6Z"></path><path d="M55.5 29.2c-10.4.1-18.2 2.7-23.5 9 4.4 7.1 11.1 10.7 18.2 8.6 6.3-1.9 9.5-8.2 5.3-17.6Z"></path><path d="M16.7 48.4c6.4-2.1 11.5-1.9 15.3 1.2 3.8-3.1 8.9-3.3 15.3-1.2-4 6.1-9.1 8.4-15.3 8.4s-11.3-2.3-15.3-8.4Z"></path></svg>
 <span>xHalo Buddhist</span>
 </a>
-<p>数字佛典 · 智慧之门</p>
+<p data-i18n="footer_text">数字佛典 · 智慧之门</p>
 </div></footer>
+<script src="/i18n.js" defer></script>
 <script defer="" src="/app.js"></script>
 </body>
 </html>
