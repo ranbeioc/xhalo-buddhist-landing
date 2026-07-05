@@ -61,7 +61,7 @@
   .lang-dropdown { position: absolute; opacity: 0; visibility: hidden; list-style: none; margin: 0; padding: 0; z-index: 200; }
   .lang-selector.open .lang-dropdown { opacity: 1; visibility: visible; }
 </style>
-<link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css?v=8.1.1" rel="stylesheet"/>
+<link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css?v=8.1.2" rel="stylesheet"/>
 <title id="page-title">xHalo Buddhist · 一念花开</title>
 </head>
 <body>
@@ -97,25 +97,45 @@
         <path d="m6 9 6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
-    <ul class="lang-dropdown" role="listbox" id="langDropdown">
-      <li role="option" data-value="zh-Hans" class="active" tabindex="0">简体中文</li>
-      <li role="option" data-value="zh-Hant" tabindex="0">繁體中文</li>
-      <li role="option" data-value="ja" tabindex="0">日本語</li>
-      <li role="option" data-value="ko" tabindex="0">한국어</li>
-      <li role="option" data-value="en" tabindex="0">English</li>
-      <li role="option" data-value="de" tabindex="0">Deutsch</li>
-      <li role="option" data-value="es" tabindex="0">Español</li>
-      <li role="option" data-value="fr" tabindex="0">Français</li>
-      <li role="option" data-value="it" tabindex="0">Italiano</li>
-      <li role="option" data-value="pt" tabindex="0">Português</li>
-      <li role="option" data-value="th" tabindex="0">ไทย</li>
-      <li role="option" data-value="my" tabindex="0">မြန်မာ</li>
-      <li role="option" data-value="vi" tabindex="0">Tiếng Việt</li>
-      <li role="option" data-value="km" tabindex="0">ភាសាខ្មែរ</li>
-      <li role="option" data-value="lo" tabindex="0">ພາສາລາວ</li>
-      <li role="option" data-value="id" tabindex="0">Bahasa Indonesia</li>
-      <li role="option" data-value="ms" tabindex="0">Bahasa Melayu</li>
-    </ul>
+    <div class="lang-dropdown" role="listbox" id="langDropdown">
+      <div class="lang-grid">
+        <!-- East Asia / 东亚亚太 -->
+        <div class="lang-col">
+          <div class="lang-col-title">东亚亚太 / East Asia</div>
+          <ul class="lang-list">
+            <li role="option" data-value="zh-Hans" class="active" tabindex="0">简体中文</li>
+            <li role="option" data-value="zh-Hant" tabindex="0">繁體中文</li>
+            <li role="option" data-value="ja" tabindex="0">日本語</li>
+            <li role="option" data-value="ko" tabindex="0">한국어</li>
+          </ul>
+        </div>
+        <!-- Southeast Asia / 东南亚 -->
+        <div class="lang-col">
+          <div class="lang-col-title">东南亚 / Southeast Asia</div>
+          <ul class="lang-list">
+            <li role="option" data-value="vi" tabindex="0">Tiếng Việt</li>
+            <li role="option" data-value="th" tabindex="0">ไทย</li>
+            <li role="option" data-value="id" tabindex="0">Bahasa Indonesia</li>
+            <li role="option" data-value="ms" tabindex="0">Bahasa Melayu</li>
+            <li role="option" data-value="my" tabindex="0">မြန်မာ</li>
+            <li role="option" data-value="km" tabindex="0">ភាសាខ្មែរ</li>
+            <li role="option" data-value="lo" tabindex="0">ພາສາລາວ</li>
+          </ul>
+        </div>
+        <!-- Europe & Global / 欧美全球 -->
+        <div class="lang-col">
+          <div class="lang-col-title">欧美全球 / Europe & Global</div>
+          <ul class="lang-list">
+            <li role="option" data-value="en" tabindex="0">English</li>
+            <li role="option" data-value="es" tabindex="0">Español</li>
+            <li role="option" data-value="fr" tabindex="0">Français</li>
+            <li role="option" data-value="de" tabindex="0">Deutsch</li>
+            <li role="option" data-value="it" tabindex="0">Italiano</li>
+            <li role="option" data-value="pt" tabindex="0">Português</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
   <a class="header-cta" href="#sutras" data-i18n="cta_experience">进入体验</a>
   <button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="menu-button" data-menu-button="" type="button">
@@ -264,7 +284,7 @@
 </a>
 <p data-i18n="footer_text">数字佛典 · 智慧之门</p>
 </div></footer>
-<script src="/i18n.js?v=8.1.1" defer></script>
-<script defer="" src="/app.js?v=8.1.1"></script>
+<script src="/i18n.js?v=8.1.2" defer></script>
+<script defer="" src="/app.js?v=8.1.2"></script>
 </body>
 </html>
