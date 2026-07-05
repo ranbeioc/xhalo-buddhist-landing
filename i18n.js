@@ -753,15 +753,14 @@
       const key = el.getAttribute('data-i18n');
       const val = getTranslation(key);
       if (val) {
-        // Keep potential child nodes (e.g. SVG inside primary buttons)
-        const svgChild = el.querySelector('svg');
-        if (svgChild) {
-          // If there is an SVG inside, wrap text in span or just replace text node
+        // Keep potential child nodes (e.g. SVG inside buttons, or span for lines inside eyebrow)
+        if (el.children.length > 0) {
+          // If there are child elements, only replace the text node
           let textNode = Array.from(el.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
           if (textNode) {
             textNode.nodeValue = val;
           } else {
-            // If no text node, add it
+            // If no text node exists, append one
             el.appendChild(document.createTextNode(val));
           }
         } else {
