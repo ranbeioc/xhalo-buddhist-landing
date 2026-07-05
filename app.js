@@ -21,14 +21,18 @@
   const closeMenu = () => {
     if (!menuButton || !mobileMenu) return;
     menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', '打开菜单');
+    const label = typeof window.getTranslation === 'function' ? window.getTranslation('menu_aria_open') : '打开菜单';
+    menuButton.setAttribute('aria-label', label);
     mobileMenu.classList.remove('open');
   };
 
   menuButton?.addEventListener('click', () => {
     const next = menuButton.getAttribute('aria-expanded') !== 'true';
     menuButton.setAttribute('aria-expanded', String(next));
-    menuButton.setAttribute('aria-label', next ? '关闭菜单' : '打开菜单');
+    const label = typeof window.getTranslation === 'function' 
+      ? window.getTranslation(next ? 'menu_aria_close' : 'menu_aria_open') 
+      : (next ? '关闭菜单' : '打开菜单');
+    menuButton.setAttribute('aria-label', label);
     mobileMenu?.classList.toggle('open', next);
   });
   mobileMenu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
