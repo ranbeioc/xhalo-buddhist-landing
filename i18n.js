@@ -805,6 +805,20 @@
     if (currentNameEl) {
       currentNameEl.textContent = langNames[currentLang];
     }
+
+    // Keep cross-page navigation in the selected interface language.
+    document.querySelectorAll('[data-lang-route]').forEach(el => {
+      const route = el.getAttribute('data-lang-route');
+      if (!route) return;
+      const target = new URL(route, window.location.origin);
+      target.searchParams.set('lang', currentLang);
+      el.setAttribute('href', target.pathname + target.search + target.hash);
+    });
+
+    // The primary experience always opens the first verified work in the Thirteen Sutras.
+    document.querySelectorAll('[data-reader-entry]').forEach(el => {
+      el.setAttribute('href', `https://foread.xhalo.co/${encodeURIComponent(currentLang)}/read/cbeta/T08n0251/lzh-Hant/cbeta`);
+    });
   }
 
   function setLanguage(lang) {

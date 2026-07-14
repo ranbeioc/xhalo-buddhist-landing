@@ -61,7 +61,7 @@
   .lang-dropdown { position: absolute; opacity: 0; visibility: hidden; list-style: none; margin: 0; padding: 0; z-index: 200; }
   .lang-selector.open .lang-dropdown { opacity: 1; visibility: visible; }
 </style>
-<link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css?v=8.1.3" rel="stylesheet"/>
+<link as="image" fetchpriority="high" href="/assets/buddha-backdrop-v8.webp" rel="preload"/><link as="image" fetchpriority="high" href="/assets/buddha-foreground.webp" rel="preload"/><link as="image" href="/assets/river-background.webp" rel="preload"/><link href="/styles-v8.css?v=8.1.4" rel="stylesheet"/>
 <title id="page-title">xHalo Buddhist · 一念花开</title>
 </head>
 <body>
@@ -78,9 +78,9 @@
 </a>
 <nav aria-label="主导航" class="desktop-nav" data-i18n-aria="menu_desktop_aria">
 <a class="active" href="#sutras" data-i18n="nav_sutras">佛典</a>
-<a href="/thirteen/" data-i18n="nav_wisdom">十三经</a>
-<a href="/library/" data-i18n="nav_practice">经典目录</a>
-<a href="/data/" data-i18n="nav_about">数据说明</a>
+<a href="/thirteen/" data-lang-route="/thirteen/" data-i18n="nav_wisdom">十三经</a>
+<a href="/library/" data-lang-route="/library/" data-i18n="nav_practice">经典目录</a>
+<a href="/data/" data-lang-route="/data/" data-i18n="nav_about">数据说明</a>
 </nav>
 <div class="header-right">
   <div class="lang-selector" id="langSelector">
@@ -146,17 +146,17 @@
       </div>
     </div>
   </div>
-  <a class="header-cta" href="/thirteen/" data-i18n="cta_experience">进入体验</a>
+  <a class="header-cta" href="https://foread.xhalo.co/zh-Hans/read/cbeta/T08n0251/lzh-Hant/cbeta" data-reader-entry data-i18n="cta_experience">进入体验</a>
   <button aria-controls="mobile-menu" aria-expanded="false" aria-label="打开菜单" class="menu-button" data-menu-button="" type="button">
     <span></span><span></span>
   </button>
 </div>
 <nav aria-label="移动端导航" class="mobile-menu" data-mobile-menu="" id="mobile-menu" data-i18n-aria="menu_mobile_aria">
 <a href="#sutras" data-i18n="nav_sutras">佛典</a>
-<a href="/thirteen/" data-i18n="nav_wisdom">十三经</a>
-<a href="/library/" data-i18n="nav_practice">经典目录</a>
-<a href="/data/" data-i18n="nav_about">数据说明</a>
-<a class="mobile-cta" href="/thirteen/" data-i18n="cta_experience">进入体验</a>
+<a href="/thirteen/" data-lang-route="/thirteen/" data-i18n="nav_wisdom">十三经</a>
+<a href="/library/" data-lang-route="/library/" data-i18n="nav_practice">经典目录</a>
+<a href="/data/" data-lang-route="/data/" data-i18n="nav_about">数据说明</a>
+<a class="mobile-cta" href="https://foread.xhalo.co/zh-Hans/read/cbeta/T08n0251/lzh-Hant/cbeta" data-reader-entry data-i18n="cta_experience">进入体验</a>
 </nav></header>
 <main id="main">
 <section aria-labelledby="hero-title" class="hero" id="top">
@@ -240,11 +240,11 @@
 </h1>
 <p class="hero-lead" data-i18n="hero_lead">穿越语言、时代与宗派的边界，在浩瀚佛典中寻找清明、慈悲与内在秩序。</p>
 <div class="hero-actions">
-<a class="button button-primary" href="https://foread.xhalo.co/">
+<a class="button button-primary" href="/thirteen/" data-lang-route="/thirteen/">
 <span data-i18n="hero_btn_explore">开始探索</span>
 <svg aria-hidden="true" viewbox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
 </a>
-<a class="button button-secondary" href="#about" data-i18n="hero_btn_learn">了解 xHalo Buddhist</a>
+<a class="button button-secondary" href="/library/" data-lang-route="/library/" data-i18n="hero_btn_learn">了解 xHalo Buddhist</a>
 </div>
 </div><a aria-label="向下滚动查看佛典能力" class="scroll-hint" href="#sutras" data-i18n-aria="scroll_hint_aria">
 <span data-i18n="scroll_hint">向下滚动 探索更多</span>
@@ -293,7 +293,7 @@
 </a>
 <p data-i18n="footer_text">数字佛典 · 智慧之门</p>
 </div></footer>
-<script src="/i18n.js?v=8.1.3" defer></script>
-<script defer="" src="/app.js?v=8.1.3"></script>
+<script src="/i18n.js?v=8.1.4" defer></script>
+<script defer="" src="/app.js?v=8.1.4"></script>
 </body>
 </html>

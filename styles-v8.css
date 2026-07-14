@@ -70,33 +70,25 @@ button { font: inherit; }
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 2.1rem;
-  padding: .55rem 1.35rem;
-  border: 1px solid rgba(255,255,255,.1);
+  gap: .25rem;
+  padding: .25rem;
+  border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(3,8,17,.32);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.02);
 }
 .desktop-nav a {
-  position: relative;
-  color: rgba(255,255,255,.68);
-  font-size: .88rem;
+  padding: .62rem .95rem;
+  border-radius: 999px;
+  color: #aeb4bf;
+  font-size: .82rem;
   text-decoration: none;
-  transition: color 180ms ease;
+  white-space: nowrap;
+  transition: color 180ms ease, background 180ms ease;
 }
-.desktop-nav a::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -.67rem;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transform: translateX(-50%);
-  transition: width 180ms ease;
+.desktop-nav a:hover, .desktop-nav a.active {
+  background: rgba(239,189,88,.11);
+  color: var(--gold);
 }
-.desktop-nav a:hover, .desktop-nav a.active { color: #fff; }
-.desktop-nav a:hover::after, .desktop-nav a.active::after { width: 100%; }
 .header-cta {
   justify-self: end;
   padding: .72rem 1.3rem;
