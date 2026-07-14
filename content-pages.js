@@ -60,8 +60,20 @@
   const params = new URLSearchParams(location.search);
   const requested = params.get('lang');
   const stored = localStorage.getItem('lang');
-  const browser = navigator.language;
-  const locale = LANGUAGES[requested] ? requested : LANGUAGES[stored] ? stored : browser.startsWith('zh-TW') || browser.startsWith('zh-HK') ? 'zh-Hant' : LANGUAGES[browser] ? browser : 'zh-Hans';
+  const browserLocale = (() => {
+    const preferences = [...(navigator.languages || []), navigator.language, navigator.userLanguage].filter(Boolean);
+    for (const preference of preferences) {
+      const normalized = String(preference).toLowerCase().replaceAll('_', '-');
+      const exact = Object.keys(LANGUAGES).find((value) => value.toLowerCase() === normalized);
+      if (exact) return exact;
+      const base = normalized.split('-')[0];
+      if (base === 'zh') return /(?:hant|tw|hk|mo)/.test(normalized) ? 'zh-Hant' : 'zh-Hans';
+      const baseMatch = Object.keys(LANGUAGES).find((value) => value.toLowerCase() === base);
+      if (baseMatch) return baseMatch;
+    }
+    return 'zh-Hans';
+  })();
+  const locale = LANGUAGES[requested] ? requested : LANGUAGES[stored] ? stored : browserLocale;
   const copy = {...EN, ...(LOCAL[locale] || {}), enter:CTA[locale] || CTA.en};
   const nav = NAV[locale] || NAV.en;
   const page = document.body.dataset.page;

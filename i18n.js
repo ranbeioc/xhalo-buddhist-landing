@@ -836,10 +836,10 @@
     });
   }
 
-  function setLanguage(lang) {
+  function setLanguage(lang, { persist = true } = {}) {
     if (!translations[lang]) return;
     currentLang = lang;
-    localStorage.setItem('lang', lang);
+    if (persist) localStorage.setItem('lang', lang);
     
     // Update active class in dropdown options
     document.querySelectorAll('#langDropdown li').forEach(li => {
@@ -869,10 +869,12 @@
     const urlLang = urlParams.get('lang');
     
     let targetLang = '';
+    let shouldPersist = false;
     
     // Priority 1: URL parameter (manual query)
     if (urlLang && translations[urlLang]) {
       targetLang = urlLang;
+      shouldPersist = true;
     }
     
     // Priority 2: Stored manual choice
@@ -932,7 +934,7 @@
       targetLang = 'zh-Hans';
     }
 
-    setLanguage(targetLang);
+    setLanguage(targetLang, { persist: shouldPersist });
   }
 
   // Handle dropdown interactions
