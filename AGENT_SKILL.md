@@ -6,6 +6,8 @@ xhalo-buddhist-landing-page-skill
 ## Purpose
 Develops the xHalo Buddhist product landing page: static Cloudflare Pages deployment with the "Rotating Halo" visual design, 17-language i18n, SEO metadata, and page-behavior analytics.
 
+The primary experience CTAs link to the production reader at `https://foread.xhalo.co/`.
+
 ## Repository Ownership
 This repository owns:
 
