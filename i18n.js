@@ -739,6 +739,14 @@
     }
   };
 
+  const footerLinkTranslations = {
+    'zh-Hans':['主页','导航','博客'],'zh-Hant':['主頁','導航','博客'],ja:['ホーム','ナビ','ブログ'],ko:['홈','탐색','블로그'],
+    en:['Home','Navigation','Blog'],de:['Startseite','Navigation','Blog'],es:['Inicio','Navegación','Blog'],fr:['Accueil','Navigation','Blog'],
+    it:['Home','Navigazione','Blog'],pt:['Início','Navegação','Blog'],th:['หน้าหลัก','นำทาง','บล็อก'],my:['ပင်မ','လမ်းညွှန်','ဘလော့ဂ်'],
+    vi:['Trang chủ','Điều hướng','Blog'],km:['ទំព័រដើម','ការរុករក','ប្លុក'],lo:['ໜ້າຫຼັກ','ນຳທາງ','ບລັອກ'],
+    id:['Beranda','Navigasi','Blog'],ms:['Laman utama','Navigasi','Blog']
+  };
+
   let currentLang = 'zh-Hans';
 
   function getTranslation(key) {
@@ -813,6 +821,13 @@
       const target = new URL(route, window.location.origin);
       target.searchParams.set('lang', currentLang);
       el.setAttribute('href', target.pathname + target.search + target.hash);
+    });
+
+    const footerLabels = footerLinkTranslations[currentLang] || footerLinkTranslations.en;
+    ['home', 'navigation', 'blog'].forEach((key, index) => {
+      document.querySelectorAll(`[data-footer-link="${key}"]`).forEach(el => {
+        el.textContent = footerLabels[index];
+      });
     });
 
     // The primary experience always opens the first verified work in the Thirteen Sutras.

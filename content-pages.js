@@ -17,8 +17,14 @@
     lo:['ພະໄຕປິໂດກ','ພຣະສູດ 13 ເຫຼັ້ມ','ສາລະບານຄຳພີ','ຄູ່ມືຂໍ້ມູນ'], id:['Sutra','Tiga Belas Sutra','Katalog','Informasi Data'],
     ms:['Sutra','Tiga Belas Sutra','Katalog','Panduan Data']
   };
+  const CTA = {
+    'zh-Hans':'进入体验','zh-Hant':'進入體驗',ja:'体験する',ko:'체험하기',en:'Enter Experience',
+    de:'Erleben',es:'Comenzar',fr:'Découvrir',it:'Inizia',pt:'Começar',th:'เข้าสู่ประสบการณ์',
+    my:'အတွေ့အကြုံယူရန်',vi:'Trải nghiệm',km:'ចូលទៅកាន់បទពិសោធន៍',lo:'ເຂົ້າສູ່ປະສົບການ',
+    id:'Mulai Pengalaman',ms:'Mulakan Pengalaman'
+  };
   const EN = {
-    skip:'Skip to main content', language:'Language', home:'Home', navigation:'Navigation', blog:'Blog',
+    skip:'Skip to main content', language:'Language', menuOpen:'Open menu', menuClose:'Close menu', home:'Home', navigation:'Navigation', blog:'Blog',
     thirteenIntro:'Browse verified primary CBETA editions while keeping alternate translations and recensions visible.',
     libraryIntro:'Browse available canonical editions by page; each item opens directly in the focused scripture reader.',
     dataIntro:'Understand the sources, current product boundaries, and production build status.', scopeTitle:'Collection scope',
@@ -31,8 +37,8 @@
     buildVersion:'Data version', buildTime:'Build time', schema:'Schema', works:'Works', status:'Release status', loadError:'The latest data could not be loaded. Please try again shortly.'
   };
   const LOCAL = {
-    'zh-Hans': {skip:'跳到主要内容',language:'语言',home:'主页',navigation:'导航',blog:'博客',thirteenIntro:'从可靠的典籍家族中选择经核验的 CBETA 主版本，并保留其他译本与异本信息。',libraryIntro:'分页浏览可用典籍版本；每项直接进入专注的正文阅读器。',dataIntro:'了解典籍来源、当前能力边界与生产数据的构建状态。',scopeTitle:'收录范围',loading:'正在读取最新数据…',read:'阅读正文',alternates:'其他译本与异本',sourceId:'来源编号',translator:'译者',source:'来源',languageLabel:'语言',relation:'关系',completeness:'完整度',recommended:'推荐',versionTitle:'版本名称',filter:'筛选当前页',totalSummary:'共 {total} 个版本 · 当前显示 {from}–{to}',pageSummary:'第 {page} / {pages} 页 · 剩余 {remaining} 页',previous:'上一页',next:'下一页',canonicalTitle:'权威正文来源',canonicalBody:'正文只从 buddb.xhalo.co 的 canonical 资产读取，不由界面生成或改写。',boundaryTitle:'阅读器边界',boundaryBody:'foread.xhalo.co 专注正文阅读、版本切换和阅读设置；目录与说明集中在此站。',searchTitle:'当前不提供检索',searchBody:'此阅读阶段不接入搜索、RAG 或生成式问答，以保持来源可核验。',buildVersion:'数据版本',buildTime:'构建时间',schema:'模式版本',works:'作品总数',status:'发布状态',loadError:'暂时无法读取最新数据，请稍后重试。'},
-    'zh-Hant': {skip:'跳到主要內容',language:'語言',home:'主頁',navigation:'導航',blog:'博客',thirteenIntro:'從可靠的典籍家族中選擇經核驗的 CBETA 主版本，並保留其他譯本與異本資訊。',libraryIntro:'分頁瀏覽可用典籍版本；每項直接進入專注的正文閱讀器。',dataIntro:'了解典籍來源、目前能力邊界與生產資料的構建狀態。',scopeTitle:'收錄範圍',loading:'正在讀取最新資料…',read:'閱讀正文',alternates:'其他譯本與異本',sourceId:'來源編號',translator:'譯者',source:'來源',languageLabel:'語言',relation:'關係',completeness:'完整度',recommended:'推薦',versionTitle:'版本名稱',filter:'篩選目前頁',totalSummary:'共 {total} 個版本 · 目前顯示 {from}–{to}',pageSummary:'第 {page} / {pages} 頁 · 剩餘 {remaining} 頁',previous:'上一頁',next:'下一頁',canonicalTitle:'權威正文來源',canonicalBody:'正文只從 buddb.xhalo.co 的 canonical 資產讀取，不由介面生成或改寫。',boundaryTitle:'閱讀器邊界',boundaryBody:'foread.xhalo.co 專注正文閱讀、版本切換和閱讀設定；目錄與說明集中在此站。',searchTitle:'目前不提供檢索',searchBody:'此閱讀階段不接入搜尋、RAG 或生成式問答，以保持來源可核驗。',buildVersion:'資料版本',buildTime:'構建時間',schema:'模式版本',works:'作品總數',status:'發布狀態',loadError:'暫時無法讀取最新資料，請稍後重試。'},
+    'zh-Hans': {skip:'跳到主要内容',language:'语言',menuOpen:'打开菜单',menuClose:'关闭菜单',home:'主页',navigation:'导航',blog:'博客',thirteenIntro:'从可靠的典籍家族中选择经核验的 CBETA 主版本，并保留其他译本与异本信息。',libraryIntro:'分页浏览可用典籍版本；每项直接进入专注的正文阅读器。',dataIntro:'了解典籍来源、当前能力边界与生产数据的构建状态。',scopeTitle:'收录范围',loading:'正在读取最新数据…',read:'阅读正文',alternates:'其他译本与异本',sourceId:'来源编号',translator:'译者',source:'来源',languageLabel:'语言',relation:'关系',completeness:'完整度',recommended:'推荐',versionTitle:'版本名称',filter:'筛选当前页',totalSummary:'共 {total} 个版本 · 当前显示 {from}–{to}',pageSummary:'第 {page} / {pages} 页 · 剩余 {remaining} 页',previous:'上一页',next:'下一页',canonicalTitle:'权威正文来源',canonicalBody:'正文只从 buddb.xhalo.co 的 canonical 资产读取，不由界面生成或改写。',boundaryTitle:'阅读器边界',boundaryBody:'foread.xhalo.co 专注正文阅读、版本切换和阅读设置；目录与说明集中在此站。',searchTitle:'当前不提供检索',searchBody:'此阅读阶段不接入搜索、RAG 或生成式问答，以保持来源可核验。',buildVersion:'数据版本',buildTime:'构建时间',schema:'模式版本',works:'作品总数',status:'发布状态',loadError:'暂时无法读取最新数据，请稍后重试。'},
+    'zh-Hant': {skip:'跳到主要內容',language:'語言',menuOpen:'開啟選單',menuClose:'關閉選單',home:'主頁',navigation:'導航',blog:'博客',thirteenIntro:'從可靠的典籍家族中選擇經核驗的 CBETA 主版本，並保留其他譯本與異本資訊。',libraryIntro:'分頁瀏覽可用典籍版本；每項直接進入專注的正文閱讀器。',dataIntro:'了解典籍來源、目前能力邊界與生產資料的構建狀態。',scopeTitle:'收錄範圍',loading:'正在讀取最新資料…',read:'閱讀正文',alternates:'其他譯本與異本',sourceId:'來源編號',translator:'譯者',source:'來源',languageLabel:'語言',relation:'關係',completeness:'完整度',recommended:'推薦',versionTitle:'版本名稱',filter:'篩選目前頁',totalSummary:'共 {total} 個版本 · 目前顯示 {from}–{to}',pageSummary:'第 {page} / {pages} 頁 · 剩餘 {remaining} 頁',previous:'上一頁',next:'下一頁',canonicalTitle:'權威正文來源',canonicalBody:'正文只從 buddb.xhalo.co 的 canonical 資產讀取，不由介面生成或改寫。',boundaryTitle:'閱讀器邊界',boundaryBody:'foread.xhalo.co 專注正文閱讀、版本切換和閱讀設定；目錄與說明集中在此站。',searchTitle:'目前不提供檢索',searchBody:'此閱讀階段不接入搜尋、RAG 或生成式問答，以保持來源可核驗。',buildVersion:'資料版本',buildTime:'構建時間',schema:'模式版本',works:'作品總數',status:'發布狀態',loadError:'暫時無法讀取最新資料，請稍後重試。'},
     ja:{language:'言語',home:'ホーム',navigation:'ナビ',blog:'ブログ',read:'本文を読む',alternates:'その他の訳本・異本',filter:'このページを絞り込む',previous:'前へ',next:'次へ'},
     ko:{language:'언어',home:'홈',navigation:'탐색',blog:'블로그',read:'본문 읽기',alternates:'다른 번역본과 이본',filter:'현재 페이지 필터',previous:'이전',next:'다음'},
     de:{language:'Sprache',home:'Startseite',navigation:'Navigation',blog:'Blog'}, es:{language:'Idioma',home:'Inicio',navigation:'Navegación',blog:'Blog'},
@@ -48,7 +54,7 @@
   const stored = localStorage.getItem('lang');
   const browser = navigator.language;
   const locale = LANGUAGES[requested] ? requested : LANGUAGES[stored] ? stored : browser.startsWith('zh-TW') || browser.startsWith('zh-HK') ? 'zh-Hant' : LANGUAGES[browser] ? browser : 'zh-Hans';
-  const copy = {...EN, ...(LOCAL[locale] || {})};
+  const copy = {...EN, ...(LOCAL[locale] || {}), enter:CTA[locale] || CTA.en};
   const nav = NAV[locale] || NAV.en;
   const page = document.body.dataset.page;
   const titles = {thirteen:nav[1],library:nav[2],data:nav[3]};
@@ -67,8 +73,40 @@
   const pageTitle=document.querySelector(`[data-copy="${page}Title"]`);if(pageTitle)pageTitle.textContent=titles[page];
   document.querySelectorAll('[data-lang-link]').forEach(link=>{link.href=pageHref(new URL(link.href).pathname);});
   document.querySelectorAll('[data-home-link]').forEach(link=>{link.href=pageHref('/');});
-  const select=document.querySelector('[data-language-select]');
-  if(select){Object.entries(LANGUAGES).forEach(([value,label])=>{const option=el('option','',label);option.value=value;option.selected=value===locale;select.append(option);});select.addEventListener('change',()=>{localStorage.setItem('lang',select.value);const next=new URL(location.href);next.searchParams.set('lang',select.value);location.assign(next);});}
+  document.querySelectorAll('[data-home-section]').forEach(link=>{const target=new URL(pageHref('/'),location.origin);target.hash='sutras';link.href=`${target.pathname}${target.search}${target.hash}`;});
+  document.querySelectorAll('[data-reader-entry]').forEach(link=>{link.href=readerHref('T08n0251','lzh-Hant');});
+
+  const header=document.querySelector('[data-header]');
+  const setHeaderState=()=>header?.classList.toggle('scrolled',window.scrollY>24);
+  setHeaderState();
+  window.addEventListener('scroll',setHeaderState,{passive:true});
+
+  const menuButton=document.querySelector('[data-menu-button]');
+  const mobileMenu=document.querySelector('[data-mobile-menu]');
+  const closeMenu=()=>{if(!menuButton || !mobileMenu)return;menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label',copy.menuOpen);mobileMenu.classList.remove('open');};
+  if(menuButton)menuButton.setAttribute('aria-label',copy.menuOpen);
+  menuButton?.addEventListener('click',()=>{const next=menuButton.getAttribute('aria-expanded')!=='true';menuButton.setAttribute('aria-expanded',String(next));menuButton.setAttribute('aria-label',next?copy.menuClose:copy.menuOpen);mobileMenu?.classList.toggle('open',next);});
+  mobileMenu?.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));
+
+  const selector=document.getElementById('langSelector');
+  const languageButton=selector?.querySelector('.lang-btn');
+  const dropdown=document.getElementById('langDropdown');
+  const closeDropdown=(restoreFocus=true)=>{if(!selector || !languageButton)return;selector.classList.remove('open');languageButton.setAttribute('aria-expanded','false');if(restoreFocus)languageButton.focus();};
+  const openDropdown=()=>{if(!selector || !languageButton || !dropdown)return;selector.classList.add('open');languageButton.setAttribute('aria-expanded','true');dropdown.querySelector('li.active')?.focus();};
+  if(selector && languageButton && dropdown){
+    languageButton.setAttribute('aria-label',copy.language);
+    const currentName=languageButton.querySelector('.current-lang-name');if(currentName)currentName.textContent=LANGUAGES[locale];
+    const options=Array.from(dropdown.querySelectorAll('li[data-value]'));
+    options.forEach((item,index)=>{
+      const active=item.dataset.value===locale;item.classList.toggle('active',active);item.setAttribute('aria-selected',String(active));
+      const selectLanguage=()=>{const value=item.dataset.value;if(!LANGUAGES[value])return;localStorage.setItem('lang',value);const next=new URL(location.href);next.searchParams.set('lang',value);location.assign(next);};
+      item.addEventListener('click',event=>{event.stopPropagation();selectLanguage();});
+      item.addEventListener('keydown',event=>{if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();const delta=event.key==='ArrowDown'?1:-1;options[(index+delta+options.length)%options.length].focus();}else if(event.key==='Enter'||event.key===' '){event.preventDefault();selectLanguage();}else if(event.key==='Escape'){event.preventDefault();closeDropdown();}});
+    });
+    languageButton.addEventListener('click',event=>{event.stopPropagation();selector.classList.contains('open')?closeDropdown():openDropdown();});
+    document.addEventListener('click',event=>{if(selector.classList.contains('open')&&!selector.contains(event.target))closeDropdown();});
+  }
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){if(selector?.classList.contains('open'))closeDropdown();closeMenu();}});
 
   function error(container) { container.replaceChildren(el('p','error-card',copy.loadError)); }
 

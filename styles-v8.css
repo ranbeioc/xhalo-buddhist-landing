@@ -765,6 +765,24 @@ footer {
   width: min(100%, var(--content-max));
   margin-inline: auto;
 }
+.home-footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  width: min(calc(100% - 3rem), var(--content-max));
+  min-height: 64px;
+  margin-inline: auto;
+  padding: 0;
+  border-top: 1px solid var(--line);
+  background: transparent;
+  color: #69717e;
+  font-size: 0.72rem;
+}
+.home-footer p { margin: 0; }
+.home-footer nav { display: flex; gap: 1rem; }
+.home-footer a { color: #89919d; text-decoration: none; }
+.home-footer a:hover { color: var(--gold); }
 
 @media (min-width: 1921px) {
   /* The scene stops growing at 1920px, while ambient gradients continue across
@@ -819,6 +837,13 @@ footer {
     flex-direction: column;
     gap: 1rem;
   }
+  .home-footer {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+    width: min(calc(100% - 2rem), var(--content-max));
+    padding: 1rem 0;
+  }
+  .home-footer nav { justify-content: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1066,9 +1091,12 @@ footer {
     font-size: 0.78rem;
   }
   .lang-dropdown {
-    width: calc(100vw - 2.5rem);
-    max-width: 480px;
-    right: -40px;
+    position: fixed;
+    top: 64px;
+    right: 1rem;
+    left: 1rem;
+    width: auto;
+    max-width: none;
     max-height: 380px;
     overflow-y: auto;
   }
@@ -1080,7 +1108,8 @@ footer {
 
 @media (max-width: 480px) {
   .lang-dropdown {
-    right: -20px;
+    right: 1rem;
+    left: 1rem;
     max-height: 350px;
   }
   .lang-grid {
