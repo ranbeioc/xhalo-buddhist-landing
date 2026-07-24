@@ -629,6 +629,37 @@ td:nth-child(7) {
 .data-status .healthy {
   color: #83c69d;
 }
+.data-sources {
+  margin-top: 2.5rem;
+}
+.data-sources h2 {
+  margin: 0 0 1rem;
+  font-family: "Songti SC", "STSong", serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+.data-sources-table {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--line);
+}
+.data-sources-table > div {
+  padding: 0.9rem 1.3rem;
+  background: #07101c;
+  color: #d5d8dd;
+  font-size: 0.85rem;
+  overflow-wrap: anywhere;
+}
+.data-sources-table > .sources-head {
+  color: #717b89;
+  font-size: 0.67rem;
+  text-transform: uppercase;
+  background: #0a1522;
+}
 .error-card {
   padding: 1.4rem;
   border: 1px solid rgba(208, 113, 91, 0.35);
