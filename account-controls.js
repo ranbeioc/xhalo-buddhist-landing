@@ -22,22 +22,24 @@
     host.querySelector("button").addEventListener("click", () => { void fetch(`${AUTH}/api/auth/sign-out`, { method: "POST", credentials: "include" }).finally(() => { cache(0); account = null; render(); }); });
   };
   const refresh = async () => {
-    if (document.visibilityState !== "visible") return;
+    if (!account || document.visibilityState !== "visible") return;
     const response = await fetch(`${CHAT_API}/v1/chat/unread`, { credentials: "include", cache: "no-store" }).catch(() => null);
     if (!response?.ok) return;
     const body = await response.json().catch(() => null);
     if (typeof body?.unreadCount === "number") { unread = cache(body.unreadCount); render(); }
+  };
+  const startUnreadRefresh = () => {
+    void refresh();
+    window.addEventListener("focus", refresh);
+    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") void refresh(); });
+    window.setInterval(refresh, 45000);
   };
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".header-right")?.prepend(host);
     void fetch(`${AUTH}/api/me`, { credentials: "include", cache: "no-store" }).then(async (response) => {
       if (!response.ok) return;
       const body = await response.json();
-      if (body.user?.email) { account = { name: body.profile?.displayName || body.user.name || body.user.email, email: body.user.email, image: body.profile?.avatarUrl || body.user.image || null }; render(); }
+      if (body.user?.email) { account = { name: body.profile?.displayName || body.user.name || body.user.email, email: body.user.email, image: body.profile?.avatarUrl || body.user.image || null }; render(); startUnreadRefresh(); }
     }).catch(() => undefined);
-    refresh();
-    window.addEventListener("focus", refresh);
-    document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") refresh(); });
-    window.setInterval(refresh, 45000);
   }, { once: true });
 })();
