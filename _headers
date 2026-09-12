@@ -9,8 +9,14 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Revalidate rather than hold for a day. The ?v= query parameter these files are linked with in
+# index.html does NOT bust Cloudflare's edge cache -- the cache key here ignores the query string,
+# so /app.js?v=NEW returned cf-cache-status: HIT with the previous file. Combined with a 24h
+# max-age that meant a shipped fix could stay invisible to visitors for a full day, which is
+# exactly what happened to a hero-performance fix on 2026-09-12. These files are small (app.js
+# ~15KB, css ~32KB) so revalidating costs a 304 round trip and keeps deploys actually deployable.
 /*.css
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
 
 /*.js
-  Cache-Control: public, max-age=86400
+  Cache-Control: public, max-age=0, must-revalidate
