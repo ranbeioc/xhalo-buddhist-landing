@@ -695,9 +695,12 @@ body {
 }
 #water-canvas {
   position: absolute;
-  inset-block: 0;
+  /* Bottom-anchored: app.js sizes this canvas to just the bottom strip the glints and fireflies
+     actually occupy (see WATER_STRIP) rather than the full hero, so it must not be pinned to the
+     top. Its height comes from the inline style app.js sets. */
+  top: auto;
+  bottom: 0;
   z-index: 6;
-  height: 100%;
   pointer-events: none;
 }
 #petal-canvas { z-index: 8; }

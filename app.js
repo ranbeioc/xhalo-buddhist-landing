@@ -100,6 +100,11 @@
   let glints = [];
   let fireflies = [];
   let waterEnabled = false;
+  // Fraction of the hero height the water canvas actually covers, anchored to the bottom.
+  // Everything drawn on it (glints from y .815, fireflies from y .805 minus glow radius/drift)
+  // fits inside this with margin to spare; see resizeCanvas.
+  const WATER_STRIP = 0.25;
+  let waterTop = 0;
   let animationFrame = 0;
   let lastTime = 0;
   let visible = !document.hidden;
@@ -120,7 +125,6 @@
       this.spin = random(-0.7, 0.7);
       this.phase = random(0, Math.PI * 2);
       this.alpha = random(0.24, 0.72);
-      this.blur = random(0, 2.4);
       this.depth = random(0.65, 1.25);
       // Built once per reset (this.size is the only thing the gradient's geometry depends on,
       // and it's fixed for the petal's lifetime), not every draw() call -- see the perf note
@@ -145,7 +149,11 @@
       ctx.rotate(this.rotation);
       ctx.scale(this.depth, this.depth * 0.65);
       ctx.globalAlpha = this.alpha;
-      if (this.blur > 1.2) ctx.filter = `blur(${this.blur}px)`;
+      // No ctx.filter = blur() here any more. A canvas filter forces the petal to be rasterized
+      // into its own surface and blurred separately before compositing, which roughly half the
+      // petals were paying for every frame -- expensive out of all proportion to the effect,
+      // given each petal is already a soft radial gradient with no hard edge to soften. Depth
+      // still reads through the existing size/alpha/depth variation.
       ctx.fillStyle = this.gradient;
       ctx.beginPath();
       ctx.moveTo(0, -this.size);
@@ -279,7 +287,7 @@
 
   const drawWater = (time) => {
     if (!waterEnabled || !waterCtx) return;
-    waterCtx.clearRect(0, 0, width, height);
+    waterCtx.clearRect(0, waterTop, width, height - waterTop);
     waterCtx.save();
     waterCtx.globalCompositeOperation = 'lighter';
     waterCtx.lineCap = 'round';
@@ -288,10 +296,17 @@
     waterCtx.restore();
   };
 
+  // Both canvases carry only soft, out-of-focus decoration -- gradient glows, blurred petal
+  // blobs, thin water glints. None of it has the fine edges that benefit from device-pixel
+  // rendering, but the cost of rendering it at >1x scales with the SQUARE of the ratio: the
+  // previous 1.5x cap meant 2.25x the pixels every frame on any high-DPI display. Measured
+  // against production on a 1512x900 viewport, that was the difference between ~20fps at dpr 1
+  // and ~4.6fps (219ms/frame, 6.1M canvas px/frame) at dpr 2 -- the severe jank reported from
+  // real machines, which a dpr-1 test environment completely hides. Pinned to 1 deliberately.
   const resizeCanvas = () => {
     width = Math.round(Math.min(hero?.clientWidth || innerWidth, 1920));
     height = Math.round(hero?.clientHeight || innerHeight);
-    dpr = Math.min(devicePixelRatio || 1, coarsePointer.matches ? 1.15 : 1.5);
+    dpr = Math.min(devicePixelRatio || 1, 1);
 
     if (canvas && ctx) {
       canvas.width = Math.round(width * dpr);
@@ -305,11 +320,19 @@
 
     waterEnabled = width >= 760 && Boolean(waterCanvas && waterCtx);
     if (waterCanvas && waterCtx) {
+      // Glints sit at y 0.815-0.992 of the hero and fireflies at 0.805-0.965 (plus ~40px of
+      // glow radius and a few px of drift), so everything this canvas ever draws lives in the
+      // bottom quarter -- yet it used to be allocated, cleared and composited at the hero's full
+      // height every frame, ~75% of it permanently blank. Sizing it to the strip it actually
+      // uses cuts this canvas's per-frame pixels by 4x. The context is translated so draw code
+      // can keep addressing positions in whole-hero coordinates.
+      waterTop = Math.round(height * (1 - WATER_STRIP));
+      const waterHeight = height - waterTop;
       waterCanvas.width = Math.round(width * dpr);
-      waterCanvas.height = Math.round(height * dpr);
+      waterCanvas.height = Math.round(waterHeight * dpr);
       waterCanvas.style.width = `${width}px`;
-      waterCanvas.style.height = `${height}px`;
-      waterCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      waterCanvas.style.height = `${waterHeight}px`;
+      waterCtx.setTransform(dpr, 0, 0, dpr, 0, -waterTop * dpr);
       const glintCount = waterEnabled ? Math.min(40, Math.max(20, Math.round(width / 52))) : 0;
       const fireflyCount = waterEnabled ? Math.min(14, Math.max(7, Math.round(width / 150))) : 0;
       glints = Array.from({ length: glintCount }, () => new WaterGlint());
