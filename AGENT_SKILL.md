@@ -32,7 +32,7 @@ This repository does not own:
 
 ## Rules
 
-- Pure static Pages deployment (Cloudflare `assets` directory = repo root) — no build step, no D1/R2/KV/Worker bindings.
+- Pages serves static assets from the repository root with no build step. The lightweight Pages Worker uses only the built-in `ASSETS` binding to localize share metadata on the four HTML routes in `_routes.json`.
 - Do not add API calls to xhalo-buddhist-api or xhalo-buddhist-data from this repo without first checking whether that logic belongs here or in a shared client package.
 - Do not commit secrets.
 - Update global registry files in `xhalo-ai-workflow` when Cloudflare ownership changes.

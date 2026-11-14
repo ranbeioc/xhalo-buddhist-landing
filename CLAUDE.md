@@ -6,7 +6,7 @@ This repository (`xhalo-buddhist-landing`) is part of the xHalo product suite: ~
 
 1. **Verify freshness first.** Run `git fetch origin --quiet`, then compare the current branch to its remote (`git rev-list --left-right --count HEAD...origin/<branch>`). If behind, resolve that before planning.
 2. **Read `AGENT_SKILL.md`** in this repo's root for ownership boundaries (added 2026-07-06 — this repo had none before).
-3. **This is a pure static Pages deployment** (no build step, no D1/R2/KV/Worker bindings). Don't add backend logic here without checking whether it belongs in `xhalo-buddhist-api` instead.
+3. **This is a static Pages deployment with a share-metadata Worker** (no build step, only the Pages-provided `ASSETS` binding). Keep new API logic with its owning service.
 4. **If the task could affect another repo**, check the global cross-repo registry at `C:\Users\ranbe\Documents\Github\xhalo-ai-workflow\docs\global-architecture\`. Treat it as a snapshot, not a live source.
 
 ## Known relationships for this repo

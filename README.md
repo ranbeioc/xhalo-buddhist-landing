@@ -30,6 +30,7 @@ Cloudflare Pages 静态部署包。v8 在 v7 分层架构基础上修复佛像�
 - 在 `<head>` 中补全了 17 种语言所对应的 `<link rel="alternate" hreflang="...">` 关联标签，辅助搜索引擎爬虫检索；
 - 新增 JSON-LD (WebSite) 结构化数据，增强搜索表现；
 - 集成了 Microsoft Clarity 页面行为统计跟踪代码。
+- 首页、十三经、经典目录和数据说明共用 1200×630 的分享图。Pages 通过 `_worker.js` 在 HTML 响应中按 `?lang=` 设置 Open Graph 和 X 卡片文案，文案复用页面的语言字典。缺少语种参数时默认使用简体中文。
 
 ### 4. 样式冲突与资源缓存失效防护 (防抖动/防错乱)
 - **静态资源防缓存**：曾在 `index.html` 的链入链接上加 `?v=` 版本查询参数试图刷新缓存。**实测该做法在本站无效**——Cloudflare 边缘缓存的 cache key 不含查询串，`/app.js?v=新版本` 依然返回 `cf-cache-status: HIT` 的旧文件；叠加 `_headers` 里 `/*.js` 的 `max-age=86400`，一次修复最长可能 24 小时对访客不可见（2026-09-12 的首屏性能修复即因此"发布了但线上没生效"）。现改为两条：`_headers` 中 JS/CSS 走 `max-age=0, must-revalidate`（文件很小，代价只是一次 304），文件名本身带版本号（如 `app-8.1.7.js`）。日常改动只需直接改文件即可生效，不必再改名；

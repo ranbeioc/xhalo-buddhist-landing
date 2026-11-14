@@ -144,7 +144,7 @@
       menu_mobile_aria: 'モバイルナビゲーション',
       menu_desktop_aria: 'メインナビゲーション',
       meta_description: 'xHalo Buddhist — 多言語仏典、全文検索、および意味探索。独立した川、仏像、回転する後光を階層的に表現。',
-      meta_og_description: '言語、時代、宗派의 境界を越え、広大な仏典の中で清明、慈悲、そして内なる秩序を追い求める。',
+      meta_og_description: '言語、時代、宗派の境界を越え、広大な仏典の中で清明、慈悲、そして内なる秩序を追い求める。',
       meta_og_title: 'xHalo Buddhist · 一念花開',
       page_title: 'xHalo Buddhist · 一念花開'
     },
@@ -522,7 +522,7 @@
       menu_mobile_aria: 'မိုဘိုင်းလမ်းညွှန်မှု',
       menu_desktop_aria: 'ပင်မလမ်းညွှန်မှု',
       meta_description: 'xHalo Buddhist — ဘာသာစကားမျိုးစုံ ပိဋကတ်တော်၊ စာသားအပြည့်အစုံရှာဖွေမှုနှင့် အဓိပ္ပာယ်ရှာဖွေမှု။ မြစ်၊ ဗုဒ္ဓရုပ်ပွားတော်နှင့် လည်ပတ်နေသော ရောင်ခြည်တော်တို့ကို အလွှာလိုက်တင်ပြထားခြင်း။',
-      meta_og_description: 'ဘာသာစကား၊ ခေတ်နှင့် ဂိုဏ်းခွဲများ၏ အကန့်အသတ်များကို ကျော်ဖြတ်ကာ ကျယ်ပြောလှသော ပိဋကတ်တော်များထဲတွင် ကြည်လင်မှု၊ ကရုဏာและ အတွင်းပိုင်းငြိမ်းချမ်းမှုကို ရှာဖွေပါ။',
+      meta_og_description: 'ဘာသာစကား၊ ခေတ်နှင့် ဂိုဏ်းခွဲများ၏ အကန့်အသတ်များကို ကျော်ဖြတ်ကာ ကျယ်ပြောလှသော ပိဋကတ်တော်များထဲတွင် ကြည်လင်မှု၊ ကရုဏာနှင့် အတွင်းပိုင်းငြိမ်းချမ်းမှုကို ရှာဖွေပါ။',
       meta_og_title: 'xHalo Buddhist · စိတ်တစ်ချက်ဖြင့် ပွင့်လန်းခြင်း',
       page_title: 'xHalo Buddhist · စိတ်တစ်ချက်ဖြင့် ပွင့်လန်းခြင်း'
     },
@@ -634,7 +634,6 @@
       feat_title_2: 'ການຄົ້ນຫາອັດສະລິຍະ',
       feat_desc_2: 'ການລວມຄຳສຳຄັນ ຕຳແຫນ່ງບົດ ແລະການສຳຫຼວດທາງອັດຖะສາດເພື່ອຫຼຸດຜ່ອນຕົ້ນທຶນການຄົ້ນຫາໃນຄຳພີທີ່ມີປະລິມານຫຼາຍ',
       feat_num_3: '03',
-      feat_title_3: 'Down-to-earth Reading',
       feat_title_3: 'ການອ່ານທີ່ສະຫງົບງຽບ',
       feat_desc_3: 'ນຳສະເຫນີພະຄຳພີດ້ວຍອິນເຕີເຟດທີ່ຮຽບງ່າຍ ມີສະມາທິ ແລະເຂົ້າເຖິງງ່າຍ ເພື່ອຮັກສາຄວາມຕໍ່ເນື່ອງຂອງການອ່ານ',
       quote_content: 'ພຶງບໍ່ຍຶດຫມັ້ນໃນສິ່ງໃດ ເພື່ອໃຫ້ຈິດເບີກບານ',
@@ -650,7 +649,7 @@
       menu_desktop_aria: 'ເມນູການນຳທາງຫຼັກ',
       meta_description: 'xHalo Buddhist — ພະໄຕປິໂດກຫຼາຍພາສາ ຄົ້ນຫາຂໍ້ຄວາມເຕັມຮູບແບບ ແລະສຳຫຼວດທາງອັດຖະສາດ ສະແດງດ້ວຍການແບ່ງຊັ້ນຂອງແມ່ນ້ຳ ພະພຸດທະຮູບ ແລະລັດສະຫມີຫມູນ',
       meta_og_description: 'ກ້າວຂ້າມຂອບເຂດຂອງພາສາ ຍຸກສະໄຫມ ແລະນິກາຍ ຄົ້ນຫາຄວາມສະຫງົບ ຄວາມເມດຕາ ແລະລະບຽບພາຍໃນໃນພະຄຳພີພຸດທະສາສະໜາອັນກວ້າງໃຫຍ່',
-      meta_og_title: 'xHalo Buddhist · ພຽງຫນຶ່ງຈິດເບີກບาน',
+      meta_og_title: 'xHalo Buddhist · ພຽງໜຶ່ງຈິດເບີກບານ',
       page_title: 'xHalo Buddhist · ພຽງຫນຶ່ງຈິດເບີກບານ'
     },
     'id': {
@@ -739,6 +738,11 @@
     }
   };
 
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = translations;
+    return;
+  }
+
   const footerLinkTranslations = {
     'zh-Hans':['主页','导航','博客'],'zh-Hant':['主頁','導航','博客'],ja:['ホーム','ナビ','ブログ'],ko:['홈','탐색','블로그'],
     en:['Home','Navigation','Blog'],de:['Startseite','Navigation','Blog'],es:['Inicio','Navegación','Blog'],fr:['Accueil','Navigation','Blog'],
@@ -803,10 +807,12 @@
     const ogTitleVal = getTranslation('meta_og_title');
     const ogTitleMeta = document.getElementById('meta-og-title') || document.querySelector('meta[property="og:title"]');
     if (ogTitleMeta) ogTitleMeta.setAttribute('content', ogTitleVal);
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', ogTitleVal);
 
     const ogDescVal = getTranslation('meta_og_description');
     const ogDescMeta = document.getElementById('meta-og-desc') || document.querySelector('meta[property="og:description"]');
     if (ogDescMeta) ogDescMeta.setAttribute('content', ogDescVal);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', ogDescVal);
 
     // Update current lang label in the selector button
     const currentNameEl = document.querySelector('.current-lang-name');
